@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حقوق الكتاب | بين الموجة والجسيم</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23c9a227'/><text x='50' y='68' font-size='60' font-family='Georgia' font-weight='900' text-anchor='middle' fill='%230f0f14'>ب</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .copyright-page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .copyright-page h1 {
+    font-family: 'Amiri', 'Cairo', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    font-weight: 700;
+    position: relative;
+  }
+  .copyright-page h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .copyright-page h2 {
+    font-family: 'Amiri', 'Cairo', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    margin: 2.5rem 0 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+  }
+  .copyright-page p {
+    font-size: 1.1rem;
+    line-height: 2.1;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .copyright-page strong {
+    color: var(--gold-light);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body class="ar">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+  <span class="en-only">العربية</span>
+  <span class="ar-only">English</span>
+</button>
+
+<div class="copyright-page">
+
+  <h1>حقوق الكتاب</h1>
+
+  <p>
+    جميع الحقوق محفوظة للمؤلف:
+    <strong>علي مسلم الزغيبي</strong>
+  </p>
+
+  <p>
+    لا يجوز إعادة نشر هذا العمل أو نسخه أو توزيعه أو اقتباس أجزاء جوهرية
+    منه بأي وسيلة، دون إذن مسبق من المؤلف، باستثناء الاقتباسات المحدودة
+    لأغراض النقد أو الدراسة وفق ما تسمح به القوانين المعمول بها.
+  </p>
+
+  <h2>تنبيه فكري</h2>
+
+  <p>
+    تستخدم هذه الرواية مفهوم الازدواجية بين الموجة والجسيم بوصفه
+    استعارة فلسفية وأدبية للتأمل في طبيعة الإنسان وعلاقته بالظروف
+    والاختيار.
+  </p>
+
+  <p>
+    ولا تقصد الرواية تقديم هذا الاستخدام بوصفه تفسيرًا علميًا أو
+    إثباتًا لنظرية فيزيائية، ولا تستبدل المفاهيم الفلسفية أو الأدبية
+    بالحقائق العلمية.
+  </p>
+
+  <p>
+    الغاية من العمل هي استخدام الصورة والاستعارة لطرح أسئلة حول
+    القدر، والحرية، والمسؤولية، والهوية، والعلاقات الإنسانية.
+  </p>
+
+</div>
+
+<script>
+  function toggleLang() {
+    document.body.classList.toggle('ar');
+    const isAr = document.body.classList.contains('ar');
+    document.documentElement.lang = isAr ? 'ar' : 'en';
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    localStorage.setItem('lumenon-book-lang', isAr ? 'ar' : 'en');
+  }
+  (function() {
+    const saved = localStorage.getItem('lumenon-book-lang');
+    if (saved === 'en') {
+      document.body.classList.remove('ar');
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+    }
+  })();
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (docHeight > 0) ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  });
+</script>
+
+</body>
+</html>

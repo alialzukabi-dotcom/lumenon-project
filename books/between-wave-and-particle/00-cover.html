@@ -4,27 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>بين الموجة والجسيم | Between Wave and Particle</title>
-<meta name="description" content="بين الموجة والجسيم — البروتوكول والإتيكيت والمرأة والقدر والاختيار. تأليف: علي مسلم الزغيبي">
+<meta name="description" content="بين الموجة والجسيم — رواية فلسفية. تأليف: علي مسلم الزغيبي">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23c9a227'/><text x='50' y='68' font-size='60' font-family='Georgia' font-weight='900' text-anchor='middle' fill='%230f0f14'>ب</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="ar">
 
-<!-- Reading Progress Bar -->
 <div class="progress-bar" id="progressBar"></div>
 
-<!-- Language Toggle -->
 <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
   <span class="en-only">العربية</span>
   <span class="ar-only">English</span>
 </button>
 
-<!-- ============================================
-     Cover Page
-     ============================================ -->
 <div class="cover-page">
 
   <div class="cover-ornament">✦ ✦ ✦</div>
@@ -36,12 +31,12 @@
 
   <p class="cover-subtitle">
     <span class="ar-only">البروتوكول والإتيكيت والمرأة والقدر والاختيار</span>
-    <span class="en-only">Protocol, Etiquette, Woman, Destiny & Choice</span>
+    <span class="en-only">Protocol, Etiquette, Woman, Destiny &amp; Choice</span>
   </p>
 
   <p class="cover-description">
-    <span class="ar-only">قراءة فلسفية في ازدواجية الإنسان</span>
-    <span class="en-only">A Philosophical Reading of Human Duality</span>
+    <span class="ar-only">رواية فلسفية</span>
+    <span class="en-only">A Philosophical Novel</span>
   </p>
 
   <div class="cover-divider"></div>
@@ -57,11 +52,11 @@
   </p>
 
   <div class="cover-actions">
-    <a href="index.html" class="btn btn-primary">
+    <a href="01-title.html" class="btn btn-primary">
       <span class="ar-only">📖 ابدأ القراءة</span>
       <span class="en-only">📖 Start Reading</span>
     </a>
-    <a href="index.html#toc" class="btn btn-outline">
+    <a href="index.html" class="btn btn-outline">
       <span class="ar-only">📑 الفهرس</span>
       <span class="en-only">📑 Table of Contents</span>
     </a>
@@ -69,27 +64,13 @@
 
 </div>
 
-<!-- ============================================
-     Footer
-     ============================================ -->
 <footer class="book-footer">
   <div class="footer-brand">Lumenon Project</div>
-  <p>
-    <span class="ar-only">جسر بين المنطق والفلسفة — كربلاء، العراق</span>
-    <span class="en-only">Bridging Logic & Philosophy — Karbala, Iraq</span>
-  </p>
-  <p style="margin-top: 1rem; font-size: 0.85rem;">
-    &copy; 2026 Lumenon Project — 
-    <span class="ar-only">جميع الحقوق محفوظة</span>
-    <span class="en-only">All Rights Reserved</span>
-  </p>
+  <p>جسر بين المنطق والفلسفة — كربلاء، العراق</p>
+  <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 Lumenon Project — جميع الحقوق محفوظة</p>
 </footer>
 
-<!-- ============================================
-     Scripts
-     ============================================ -->
 <script>
-  // ===== Language Toggle =====
   function toggleLang() {
     document.body.classList.toggle('ar');
     const isAr = document.body.classList.contains('ar');
@@ -97,8 +78,6 @@
     document.documentElement.dir = isAr ? 'rtl' : 'ltr';
     localStorage.setItem('lumenon-book-lang', isAr ? 'ar' : 'en');
   }
-
-  // ===== Load Saved Language =====
   (function() {
     const saved = localStorage.getItem('lumenon-book-lang');
     if (saved === 'en') {

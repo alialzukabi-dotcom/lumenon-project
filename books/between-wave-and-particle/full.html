@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بين الموجة والجسيم — النسخة الكاملة | Lumenon Project</title>
+<meta name="description" content="بين الموجة والجسيم — رواية فلسفية كاملة. تأليف: علي مسلم الزغيبي">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23c9a227'/><text x='50' y='68' font-size='60' font-family='Georgia' font-weight='900' text-anchor='middle' fill='%230f0f14'>ب</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a227;
+    --gold-light: #e8c547;
+    --gold-dark: #8b6914;
+    --dark: #0f0f14;
+    --dark-2: #1a1a24;
+    --dark-3: #24242f;
+    --text: #e8e8ec;
+    --text-muted: #a0a0b0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Amiri', 'Cairo', serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 2.2;
+    overflow-x: hidden;
+  }
+
+  /* Reading Progress */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s;
+  }
+
+  /* Sidebar TOC */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(15,15,20,0.96);
+    backdrop-filter: blur(12px);
+    border-left: 1px solid rgba(201,162,39,0.2);
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    z-index: 1000;
+    transform: translateX(0);
+    transition: transform 0.3s;
+  }
+
+  .sidebar.hidden { transform: translateX(100%); }
+
+  .sidebar h2 {
+    font-family: 'Amiri', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+    text-align: center;
+  }
+
+  .sidebar a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    font-family: 'Cairo', sans-serif;
+    border-radius: 6px;
+    transition: all 0.2s;
+    margin-bottom: 0.3rem;
+    border-right: 2px solid transparent;
+  }
+
+  .sidebar a:hover {
+    color: var(--gold);
+    background: rgba(201,162,39,0.08);
+    border-right-color: var(--gold);
+  }
+
+  .sidebar a.part-link {
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(201,162,39,0.15);
+  }
+
+  /* Toggle button */
+  .sidebar-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1100;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(201,162,39,0.4);
+    transition: all 0.3s;
+  }
+
+  .sidebar-toggle:hover { transform: scale(1.1); }
+
+  .sidebar-toggle.hidden { right: 300px; }
+
+  /* Main content */
+  .book-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem 8rem;
+    transition: padding 0.3s;
+  }
+
+  .book-container.sidebar-open { padding-left: 300px; padding-right: 300px; }
+
+  /* Cover */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(201,162,39,0.12), transparent 60%);
+    margin-bottom: 4rem;
+  }
+
+  .cover-ornament {
+    color: var(--gold);
+    font-size: 1.8rem;
+    letter-spacing: 1rem;
+    margin-bottom: 3rem;
+    opacity: 0.7;
+  }
+
+  .cover-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+  }
+
+  .cover-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    line-height: 1.8;
+    font-family: 'Cairo', sans-serif;
+    max-width: 600px;
+  }
+
+  .cover-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 3rem;
+  }
+
+  .cover-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem auto;
+  }
+
+  .cover-author-label {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .cover-author {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 5rem;
+    padding-top: 2rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+    font-weight: 700;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .part-header {
+    text-align: center;
+    margin: 6rem 0 4rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(180deg, rgba(201,162,39,0.06), transparent);
+    border-top: 2px solid rgba(201,162,39,0.25);
+    border-bottom: 2px solid rgba(201,162,39,0.25);
+  }
+
+  .part-header .part-label {
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 6px;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .part-header h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--gold-light);
+    font-weight: 700;
+  }
+
+  .section-number {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .content p {
+    font-size: 1.2rem;
+    line-height: 2.2;
+    margin-bottom: 1.6rem;
+    color: var(--text);
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .content p:first-of-type::first-letter {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    float: right;
+    line-height: 1;
+    margin: 0.3rem 0 0 0.6rem;
+    font-family: 'Amiri', serif;
+  }
+
+  .content strong { color: var(--gold-light); font-weight: 700; }
+  .content em { color: var(--gold); font-style: italic; }
+
+  /* Divider between chapters */
+  .chapter-divider {
+    text-align: center;
+    margin: 4rem 0;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 1rem;
+    opacity: 0.5;
+  }
+
+  /* Footer */
+  .book-end {
+    text-align: center;
+    margin-top: 6rem;
+    padding: 4rem 2rem;
+    background: var(--dark-2);
+    border-radius: 20px;
+    border: 1px solid rgba(201,162,39,0.2);
+  }
+
+  .book-end h2 {
+    font-family: 'Amiri', serif;
+    color: var(--gold);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .book-end p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .book-end .final-quote {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    font-style: italic;
+    margin: 2rem 0;
+    line-height: 2;
+  }
+
+  /* Print button */
+  .print-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 200;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(201,162,39,0.4);
+  }
+
+  /* Top button */
+  .top-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 6rem;
+    z-index: 200;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--dark-2);
+    color: var(--gold);
+    border: 1px solid rgba(201,162,39,0.3);
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  .top-btn.visible { opacity: 1; pointer-events: auto; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .sidebar { width: 260px; }
+    .sidebar.hidden { transform: translateX(100%); }
+    .sidebar-toggle.hidden { right: 280px; }
+    .book-container.sidebar-open { padding: 3rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .book-container { padding: 3rem 1.5rem 6rem; }
+    .content p { font-size: 1.1rem; }
+    .content p:first-of-type::first-letter { font-size: 2.5rem; }
+    .sidebar { width: 85vw; }
+    .sidebar-toggle.hidden { right: auto; left: 1rem; }
+  }
+
+  @media print {
+    body { background: white !important; color: black !important; }
+    .sidebar, .sidebar-toggle, .print-btn, .top-btn, .progress-bar { display: none !important; }
+    .book-container { padding: 0 !important; max-width: 100% !important; }
+    .cover, .part-header { background: white !important; }
+    .cover-title, .section-title, .part-header h1 { color: black !important; -webkit-text-fill-color: black !important; }
+    .content p { color: black !important; }
+    .content strong { color: black !important; }
+    a { color: black !important; text-decoration: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Sidebar Toggle -->
+<button class="sidebar-toggle" id="toggleBtn" onclick="toggleSidebar()" title="الفهرس">📑</button>
+
+<!-- Sidebar TOC -->
+<aside class="sidebar hidden" id="sidebar">
+  <h2>الفهرس</h2>
+  <a href="#cover" onclick="closeSidebar()">📖 الغلاف</a>
+  <a href="#title-page" onclick="closeSidebar()">صفحة العنوان</a>
+  <a href="#copyright" onclick="closeSidebar()">حقوق الكتاب</a>
+  <a href="#dedication" onclick="closeSidebar()">الإهداء</a>
+  <a href="#introduction" onclick="closeSidebar()">مقدمة المؤلف</a>
+
+  <a href="#part-1" class="part-link" onclick="closeSidebar()">الجزء الأول: المسافة</a>
+  <a href="#ch-6" onclick="closeSidebar()">المقعد</a>
+  <a href="#ch-7" onclick="closeSidebar()">الرجل الذي يحب القواعد</a>
+  <a href="#ch-8" onclick="closeSidebar()">المرأة التي لا تخاف من الاختلاف</a>
+  <a href="#ch-9" onclick="closeSidebar()">ما بين الاحترام والطاعة</a>
+  <a href="#ch-10" onclick="closeSidebar()">الصمت الأول</a>
+
+  <a href="#part-2" class="part-link" onclick="closeSidebar()">الجزء الثاني: الصورة</a>
+  <a href="#ch-12" onclick="closeSidebar()">الصورة التي رسمها الآخرون</a>
+  <a href="#ch-13" onclick="closeSidebar()">المرأة التي رفضت أن تكون صورة</a>
+  <a href="#ch-14" onclick="closeSidebar()">المرآة</a>
+  <a href="#ch-15" onclick="closeSidebar()">ما يراه الناس</a>
+  <a href="#ch-16" onclick="closeSidebar()">ما لا يراه الناس</a>
+
+  <a href="#part-3" class="part-link" onclick="closeSidebar()">الجزء الثالث: القدر</a>
+  <a href="#ch-18" onclick="closeSidebar()">الشيء الذي لم يختره</a>
+  <a href="#ch-19" onclick="closeSidebar()">حين لا يكفي الاختيار</a>
+  <a href="#ch-20" onclick="closeSidebar()">النصيب</a>
+  <a href="#ch-21" onclick="closeSidebar()">ما حدث لي</a>
+  <a href="#ch-22" onclick="closeSidebar()">ما فعلته بما حدث لي</a>
+
+  <a href="#part-4" class="part-link" onclick="closeSidebar()">الجزء الرابع: الموجة</a>
+  <a href="#ch-24" onclick="closeSidebar()">الماضي</a>
+  <a href="#ch-25" onclick="closeSidebar()">الظروف</a>
+  <a href="#ch-26" onclick="closeSidebar()">الإنسان الذي صنعته الأيام</a>
+  <a href="#ch-27" onclick="closeSidebar()">الموجة</a>
+  <a href="#ch-28" onclick="closeSidebar()">السؤال الأصعب</a>
+
+  <a href="#part-5" class="part-link" onclick="closeSidebar()">الجزء الخامس: الجسيم</a>
+  <a href="#ch-30" onclick="closeSidebar()">لحظة القرار</a>
+  <a href="#ch-31" onclick="closeSidebar()">ثمن الاختيار</a>
+  <a href="#ch-32" onclick="closeSidebar()">ما بين الخوف والحرية</a>
+  <a href="#ch-33" onclick="closeSidebar()">الجسيم</a>
+  <a href="#ch-34" onclick="closeSidebar()">الطريق الذي اختاره</a>
+
+  <a href="#ending" class="part-link" onclick="closeSidebar()">الخاتمة</a>
+  <a href="#ch-35" onclick="closeSidebar()">العودة</a>
+  <a href="#ch-36" onclick="closeSidebar()">الرسالة</a>
+  <a href="#ch-37" onclick="closeSidebar()">المقعد الأخير</a>
+  <a href="#ch-38" onclick="closeSidebar()">الخاتمة</a>
+  <a href="#ch-39" onclick="closeSidebar()">نبذة عن المؤلف</a>
+</aside>
+
+<main class="book-container" id="mainContent">
+
+  <!-- COVER -->
+  <section class="cover" id="cover">
+    <div class="cover-ornament">✦ ✦ ✦</div>
+    <h1 class="cover-title">بين الموجة والجسيم</h1>
+    <p class="cover-subtitle">البروتوكول والإتيكيت والمرأة والقدر والاختيار</p>
+    <p class="cover-description">رواية فلسفية</p>
+    <div class="cover-divider"></div>
+    <p class="cover-author-label">تأليف</p>
+    <p class="cover-author">علي مسلم الزغيبي</p>
+  </section>
+
+  <!-- TITLE PAGE -->
+  <section class="section" id="title-page">
+    <h2 class="section-title">صفحة العنوان</h2>
+    <div class="content" style="text-align: center;">
+      <p><strong>بين الموجة والجسيم</strong></p>
+      <p>البروتوكول والإتيكيت والمرأة والقدر والاختيار</p>
+      <p><em>رواية فلسفية</em></p>
+      <div class="cover-divider"></div>
+      <p>تأليف</p>
+      <p><strong style="font-size: 1.4rem;">علي مسلم الزغيبي</strong></p>
+      <div class="cover-divider"></div>
+      <p style="font-style: italic; color: var(--gold-light);">رواية عن الإنسان حين يجد نفسه بين ما لم يختره، وما يزال قادرًا على اختياره.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- COPYRIGHT -->
+  <section class="section" id="copyright">
+    <h2 class="section-title">حقوق الكتاب</h2>
+    <div class="content">
+      <p>جميع الحقوق محفوظة للمؤلف: <strong>علي مسلم الزغيبي</strong></p>
+      <p>لا يجوز إعادة نشر هذا العمل أو نسخه أو توزيعه أو اقتباس أجزاء جوهرية منه بأي وسيلة، دون إذن مسبق من المؤلف، باستثناء الاقتباسات المحدودة لأغراض النقد أو الدراسة وفق ما تسمح به القوانين المعمول بها.</p>
+      <h3 style="color: var(--gold-light); margin: 2rem 0 1rem; text-align: center;">تنبيه فكري</h3>
+      <p>تستخدم هذه الرواية مفهوم الازدواجية بين الموجة والجسيم بوصفه استعارة فلسفية وأدبية للتأمل في طبيعة الإنسان وعلاقته بالظروف والاختيار.</p>
+      <p>ولا تقصد الرواية تقديم هذا الاستخدام بوصفه تفسيرًا علميًا أو إثباتًا لنظرية فيزيائية، ولا تستبدل المفاهيم الفلسفية أو الأدبية بالحقائق العلمية.</p>
+      <p>الغاية من العمل هي استخدام الصورة والاستعارة لطرح أسئلة حول القدر، والحرية، والمسؤولية، والهوية، والعلاقات الإنسانية.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- DEDICATION -->
+  <section class="section" id="dedication">
+    <h2 class="section-title">الإهداء</h2>
+    <div class="content" style="text-align: center;">
+      <p>إلى الإنسان الذي وقف طويلًا أمام حياته يسأل:</p>
+      <p><strong>ماذا اخترت؟</strong></p>
+      <p><strong>وماذا اختير لي؟</strong></p>
+      <p>إلى من حمل أشياء لم يطلبها، وعاش نتائج قرارات لم يتخذها، ثم اكتشف، بعد وقت طويل، أن بين ما حدث له وما فعله بما حدث له مسافة صغيرة... لكنها قد تكون المسافة التي تصنع حياته كلها.</p>
+      <p>إلى المرأة التي رفضت أن تكون صورة في عين أحد، وإلى الرجل الذي اكتشف أن احترام الآخر يبدأ حين يتوقف عن محاولة امتلاكه.</p>
+      <p>إلى كل من وقف عند مفترق طريق ولم يعرف أي الطريقين كان قدرًا، وأيهما كان اختيارًا.</p>
+      <p>إلى هؤلاء...</p>
+      <p style="color: var(--gold); font-size: 1.5rem; font-weight: 700; margin-top: 2rem;">هذا الكتاب.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- INTRODUCTION -->
+  <section class="section" id="introduction">
+    <span class="section-number">§ 04</span>
+    <h2 class="section-title">مقدمة المؤلف</h2>
+    <div class="content">
+      <p>هناك أسئلة لا تموت.</p>
+      <p>قد ندفنها تحت العمل، والعائلة، والعادات، والسنوات، وقد نقنع أنفسنا بأن الحياة لا تحتاج إلى كل هذا التفكير، لكنها تعود في لحظة هدوء واحدة وتسألنا من جديد:</p>
+      <p>هل كنا نختار فعلًا؟</p>
+      <p>أم أننا كنا نمشي في طريق رُسم لنا قبل أن نعرف كيف نمشي؟</p>
+      <p>نحن لا نختار المكان الذي نولد فيه، ولا الأسرة التي نأتي منها، ولا اللغة الأولى التي تتشكل بها أفكارنا، ولا كثيرًا من الظروف التي تضعنا في بداية الطريق.</p>
+      <p>ومع ذلك، يطلب منا العالم أن نتحمل مسؤولية أفعالنا.</p>
+      <p>فإذا كان الإنسان لم يختر البداية، فأين يبدأ اختياره؟</p>
+      <p>وهل يكون القدر عذرًا لكل شيء؟</p>
+      <p>وهل تكون الحرية قدرة على فعل كل ما نريد؟</p>
+      <p>أم أن الحرية تبدأ تحديدًا عندما ندرك أن قدرتنا محدودة، وأن علينا أن نختار داخل حدود لم نخترها؟</p>
+      <p>من هنا بدأت هذه الرواية.</p>
+      <p>لم أرد أن أكتب كتابًا يشرح الفلسفة للقارئ، ولا أن أضع أمامه مجموعة من التعريفات والأسئلة ثم أقدم لها إجابات جاهزة.</p>
+      <p>أردت أن أضع الإنسان داخل السؤال.</p>
+      <p>أن أجعله يرى القاعدة وهي تتحول إلى سلطة، والاحترام وهو يختلط بالطاعة، والقرب وهو يقترب من الامتلاك، والحب وهو يصطدم بالحدود، والمرأة وهي تحاول أن تحافظ على حقها في أن تكون إنسانة قبل أن تكون صورة اجتماعية.</p>
+      <p>ثم أردت أن أصل إلى السؤال الأصعب:</p>
+      <p>ماذا نفعل بما لم نختره؟</p>
+      <p>فالإنسان لا يستطيع دائمًا أن يختار ما يحدث له. لكنه، في كثير من الأحيان، يستطيع أن يختار موقفه مما حدث.</p>
+      <p>وهنا يظهر الفرق بين الإنسان الذي تحمله الظروف، والإنسان الذي يتخذ موقفًا داخل الظروف.</p>
+      <p>في هذه الرواية، أستخدم صورة الموجة والجسيم بوصفها استعارة فلسفية لا تفسيرًا فيزيائيًا.</p>
+      <p>الموجة هي الإنسان حين ننظر إليه داخل امتداد حياته: أسرته، وماضيه، وثقافته، وخوفه، وذكرياته، والظروف التي صنعت جزءًا من شخصيته.</p>
+      <p>أما الجسيم فهو الإنسان في لحظة القرار؛ حين يصبح السؤال أكثر قربًا:</p>
+      <p>ماذا سأفعل الآن؟</p>
+      <p>قد لا يكون الإنسان مسؤولًا عن كل ما وصل إليه، لكنه قد يصبح مسؤولًا عن الطريق الذي يختاره بعد أن يصل.</p>
+      <p>ولهذا فإن الجملة التي تسير في خلفية هذه الرواية هي:</p>
+      <p style="text-align: center; color: var(--gold-light); font-size: 1.3rem; font-weight: 700; margin: 2rem 0;">ربما لم أختر ما حدث لي، لكنني ما زلت مسؤولًا عمّا فعلته بما حدث لي.</p>
+      <p>أما البروتوكول والإتيكيت، فلم أتناولهما باعتبارهما مجموعة من القواعد الاجتماعية الصغيرة، بل باعتبارهما سؤالًا أكبر عن علاقتنا بالآخر.</p>
+      <p>متى تكون القاعدة حماية؟</p>
+      <p>ومتى تتحول إلى سيطرة؟</p>
+      <p>متى يكون الاحترام احترامًا حقيقيًا؟</p>
+      <p>ومتى يصبح مجرد خوف من مخالفة السلطة؟</p>
+      <p>ومتى يكون الصمت حكمة؟</p>
+      <p>ومتى يصبح هروبًا؟</p>
+      <p>وكيف يمكن للإنسان أن يحب دون أن يمتلك؟</p>
+      <p>وكيف يمكنه أن يقترب دون أن يلغي المسافة التي يحتاجها الآخر؟</p>
+      <p>هذه ليست رواية عن رجل وامرأة فقط.</p>
+      <p>وليست رواية عن القدر وحده، ولا عن الحرية وحدها.</p>
+      <p>إنها محاولة للنظر إلى الإنسان وهو يقف بين عالمين:</p>
+      <p>عالم الأشياء التي حدثت له، وعالم الأشياء التي قرر أن يفعلها بها.</p>
+      <p>ومن تلك المسافة تبدأ الحكاية.</p>
+    </div>
+  </section>
+
+  <!-- PART 1 -->
+  <div class="part-header" id="part-1">
+    <span class="part-label">الجزء الأول</span>
+    <h1>المسافة</h1>
+  </div>
+
+  <section class="section" id="ch-5">
+    <div class="content">
+      <p>لم تبدأ الحكاية بحب.</p>
+      <p>ولم تبدأ بخلاف كبير.</p>
+      <p>بدأت بمقعد.</p>
+      <p>كان ذلك في مساء هادئ، داخل قاعة واسعة أُعدت بعناية لاستقبال مجموعة من الضيوف في مناسبة رسمية.</p>
+      <p>كل شيء كان في مكانه.</p>
+      <p>الطاولات.</p>
+      <p>البطاقات.</p>
+      <p>المقاعد.</p>
+      <p>حتى المسافات بين المقاعد كانت محسوبة بحيث لا يضطر أحد إلى السؤال عن مكانه.</p>
+      <p>كان آدم يحب مثل هذه الأماكن.</p>
+      <p>لم يكن يحب الضجيج، ولا المفاجآت، ولا الأشخاص الذين يتعاملون مع القواعد وكأنها اقتراحات قابلة للتفاوض.</p>
+      <p>كان يرى في النظام شيئًا يشبه الطمأنينة.</p>
+      <p>حين يكون لكل شيء مكان، يصبح من السهل معرفة ما ينبغي فعله.</p>
+      <p>وحين يعرف الإنسان ما ينبغي فعله، يقل احتمال الخطأ.</p>
+      <p>ولهذا كان آدم يعتقد أن احترام القواعد ليس مجرد التزام اجتماعي، بل شكل من أشكال احترام الآخرين.</p>
+      <p>لم يكن يعرف بعد أن هذه الفكرة التي منحته راحته طوال سنوات ستصبح يومًا السؤال الذي سيهز حياته.</p>
+      <p>دخل القاعة قبل الموعد بقليل.</p>
+      <p>نظر إلى البطاقة الموضوعة أمام أحد المقاعد، ثم جلس.</p>
+      <p>بعد دقائق بدأت القاعة تمتلئ.</p>
+      <p>أصوات متداخلة.</p>
+      <p>تحيات قصيرة.</p>
+      <p>ابتسامات محسوبة.</p>
+      <p>وأشخاص يعرف كل واحد منهم تقريبًا أين ينبغي أن يكون.</p>
+      <p>ثم دخلت ليان.</p>
+      <p>لم يلفت آدم انتباهه دخولها لأنها كانت الأكثر أناقة، ولا لأنها كانت الأكثر صخبًا.</p>
+      <p>على العكس.</p>
+      <p>دخلت بهدوء، توقفت لحظة عند المدخل، نظرت إلى القاعة، ثم تقدمت.</p>
+      <p>كانت تحمل شيئًا من الهدوء يجعل المرء يلاحظها دون أن يعرف لماذا.</p>
+      <p>توقفت عند أحد المقاعد.</p>
+      <p>نظرت إلى البطاقة الموضوعة أمامه.</p>
+      <p>ثم نزعتها بهدوء.</p>
+      <p>جلسَت.</p>
+      <p>رفع آدم عينيه إليها.</p>
+      <p>في البداية لم يقل شيئًا.</p>
+      <p>ظن أنها أخطأت.</p>
+      <p>ثم ظن أنها لم تنتبه.</p>
+      <p>لكنه لاحظ أنها تعرف تمامًا ما فعلت.</p>
+      <p>انتظر قليلًا.</p>
+      <p>ثم قال بصوت هادئ:</p>
+      <p>«هذا المقعد ليس لك.»</p>
+      <p>رفعت عينيها إليه.</p>
+      <p>لم تبدُ غاضبة.</p>
+      <p>قالت:</p>
+      <p>«ومن قال ذلك؟»</p>
+      <p>أشار إلى البطاقة التي وضعتها جانبًا.</p>
+      <p>«البطاقة.»</p>
+      <p>ابتسمت ابتسامة خفيفة.</p>
+      <p>«والبطاقة من وضعها؟»</p>
+      <p>قال:</p>
+      <p>«المنظمون.»</p>
+      <p>سألته:</p>
+      <p>«ولماذا؟»</p>
+      <p>أجاب دون تردد:</p>
+      <p>«لأن هذا هو البروتوكول.»</p>
+      <p>سكتت لحظة.</p>
+      <p>ثم قالت:</p>
+      <p>«البروتوكول ينظم المكان، لا يملك الإنسان.»</p>
+      <p>كانت تلك أول جملة تقولها ليان لآدم.</p>
+      <p>وكانت أول جملة تجعله يشعر أن القاعدة التي كان يراها واضحة ليست واضحة للجميع.</p>
+      <p>نظر إليها طويلًا.</p>
+      <p>ثم إلى المقعد.</p>
+      <p>ثم إلى البطاقة الموضوعة بجانبها.</p>
+      <p>وللمرة الأولى منذ زمن طويل، لم يعرف أيهما يجب أن يدافع عنه:</p>
+      <p>القاعدة...</p>
+      <p>أم الإنسان.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 6 - المقعد -->
+  <section class="section" id="ch-6">
+    <span class="section-number">§ 06</span>
+    <h2 class="section-title">المقعد</h2>
+    <div class="content">
+      <p>لم يكن المقعد مهمًا إلى هذه الدرجة.</p>
+      <p>كان آدم يعرف ذلك، ومع ذلك لم يستطع أن يتجاهله.</p>
+      <p>ظل ينظر إلى البطاقة الموضوعة بجانب ليان، وكأنها دليل صغير على أن العالم ما زال يعمل بالطريقة التي اعتادها.</p>
+      <p>قال:</p>
+      <p>«إذا بدأ كل شخص يختار مكانه بنفسه، فما معنى أن نضع ترتيبًا أصلًا؟»</p>
+      <p>أجابت:</p>
+      <p>«ربما يكون للترتيب معنى، لكن هذا لا يعني أن كل ترتيب مقدس.»</p>
+      <p>قال آدم:</p>
+      <p>«لم أقل إنه مقدس.»</p>
+      <p>«لكنك تتصرف وكأنه كذلك.»</p>
+      <p>تغيرت ملامحه قليلًا.</p>
+      <p>لم يكن معتادًا أن يصفه أحد بهذه السرعة.</p>
+      <p>قال:</p>
+      <p>«أنا فقط أعتقد أن احترام النظام جزء من احترام الآخرين.»</p>
+      <p>«وأنا أعتقد ذلك أيضًا.»</p>
+      <p>نظر إليها باستغراب.</p>
+      <p>«إذن لماذا جلست هنا؟»</p>
+      <p>أشارت إلى المقعد.</p>
+      <p>«لأنني لم أجد سببًا يجعلني أحتل مكان شخص آخر.»</p>
+      <p>قال:</p>
+      <p>«المكان ليس لك.»</p>
+      <p>«هل تعرف لمن هو؟»</p>
+      <p>«نعم.»</p>
+      <p>«وهل هو موجود؟»</p>
+      <p>نظر آدم إلى القاعة.</p>
+      <p>كان المقعد إلى جوارها فارغًا.</p>
+      <p>قال:</p>
+      <p>«سيأتي.»</p>
+      <p>ابتسمت.</p>
+      <p>«إذن عندما يأتي سأتركه له.»</p>
+      <p>«الموضوع ليس بهذه البساطة.»</p>
+      <p>«لماذا؟»</p>
+      <p>«لأن هناك قواعد.»</p>
+      <p>«وأنا لم أخالف قاعدة تمنعني من الجلوس هنا.»</p>
+      <p>«البطاقة تمنعك.»</p>
+      <p>نظرت إلى البطاقة.</p>
+      <p>ثم قالت:</p>
+      <p>«البطاقة تقول إن المقعد مخصص لشخص آخر. لكنها لا تقول إن وجودي فيه اعتداء عليه.»</p>
+      <p>سكت آدم.</p>
+      <p>كان يستطيع أن يرد بسهولة.</p>
+      <p>لكنه شعر أن أي جواب سيعيده إلى النقطة نفسها.</p>
+      <p>قال أخيرًا:</p>
+      <p>«أنت تحولين مسألة بسيطة إلى قضية فلسفية.»</p>
+      <p>ضحكت بهدوء.</p>
+      <p>«وأنت تحول قضية فلسفية إلى مسألة مقعد.»</p>
+      <p>لأول مرة ابتسم آدم.</p>
+      <p>كانت ابتسامته قصيرة، لكنه لم يستطع منعها.</p>
+      <p>ثم قال:</p>
+      <p>«هل تفعلين هذا دائمًا؟»</p>
+      <p>«ماذا؟»</p>
+      <p>«تجادلين في كل شيء.»</p>
+      <p>قالت:</p>
+      <p>«لا. فقط عندما أشعر أن الشيء الصغير يخفي وراءه شيئًا أكبر.»</p>
+      <p>نظر إليها.</p>
+      <p>«وماذا يخفي هذا المقعد؟»</p>
+      <p>لم تجبه فورًا.</p>
+      <p>نظرت حولها إلى القاعة، إلى الأشخاص الذين جلس كل واحد منهم في المكان المخصص له، ثم قالت:</p>
+      <p>«ربما سؤالًا بسيطًا.»</p>
+      <p>«ما هو؟»</p>
+      <p>«هل نحن نحترم القواعد لأنها تحمي الناس، أم لأننا تعودنا طاعتها؟»</p>
+      <p>بقي آدم صامتًا.</p>
+      <p>كان السؤال بسيطًا فعلًا.</p>
+      <p>ولهذا كان مزعجًا.</p>
+      <p>فالأسئلة الصعبة يمكن للمرء أن يتهرب منها بحجة تعقيدها، أما السؤال البسيط فلا يمنحه هذه الفرصة.</p>
+      <p>قبل أن يجيب، دخل رجل إلى القاعة.</p>
+      <p>تقدم نحو المقعد.</p>
+      <p>توقفت ليان عن الكلام، ونهضت فورًا.</p>
+      <p>قال الرجل:</p>
+      <p>«أظن أن هذا مقعدي.»</p>
+      <p>قالت:</p>
+      <p>«نعم. تفضل.»</p>
+      <p>ابتعدت خطوة.</p>
+      <p>جلس الرجل.</p>
+      <p>نظر آدم إليها.</p>
+      <p>لم يكن هناك خلاف الآن.</p>
+      <p>لم يحدث شيء.</p>
+      <p>ومع ذلك، بقي السؤال في مكانه.</p>
+      <p>قال آدم:</p>
+      <p>«كان بإمكانك أن تجلسي في مكانك من البداية.»</p>
+      <p>قالت:</p>
+      <p>«وكان بإمكانك أن تسألني قبل أن تحكم.»</p>
+      <p>ثم ابتعدت.</p>
+      <p>بقي آدم في مكانه.</p>
+      <p>ولم يعرف لماذا شعر أن المقعد الذي لم تجلس فيه ليان أصبح أكثر حضورًا من أي شيء آخر في القاعة.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 7 - الرجل الذي يحب القواعد -->
+  <section class="section" id="ch-7">
+    <span class="section-number">§ 07</span>
+    <h2 class="section-title">الرجل الذي يحب القواعد</h2>
+    <div class="content">
+      <p>كان آدم يحب القواعد.</p>
+      <p>ولم يرَ في ذلك عيبًا.</p>
+      <p>كان يعتقد أن الإنسان الذي يعرف حدوده يستطيع أن يعيش مع الآخرين بأقل قدر من الفوضى.</p>
+      <p>منذ طفولته، تعلم أن الأشياء الجيدة لها ترتيب.</p>
+      <p>الكتب في مكانها.</p>
+      <p>الملابس في مكانها.</p>
+      <p>المواعيد لا تتأخر.</p>
+      <p>الكلمة لها وزن.</p>
+      <p>والوعد ليس شيئًا يقوله الإنسان ثم ينساه.</p>
+      <p>كان أبوه يقول له دائمًا:</p>
+      <p>«الناس لا يحترمون الرجل الذي لا يعرف حدوده.»</p>
+      <p>كبر آدم وهو يحمل هذه الجملة معه.</p>
+      <p>لم يكن يعرف أن الإنسان قد يحمل نصيحة صحيحة حتى تتحول في داخله إلى قانون لا يقبل المراجعة.</p>
+      <p>في مساء اليوم نفسه، جلس آدم مع صديقه سليم في مقهى هادئ.</p>
+      <p>كان سليم يعرفه منذ سنوات طويلة، ولهذا كان يعرف متى يكون آدم غاضبًا حتى عندما لا يرفع صوته.</p>
+      <p>قال سليم:</p>
+      <p>«أنت تفكر في الموضوع أكثر مما يستحق.»</p>
+      <p>«أي موضوع؟»</p>
+      <p>«المقعد.»</p>
+      <p>رفع آدم عينيه عن فنجان القهوة.</p>
+      <p>«أخبرتك عنه مرة واحدة.»</p>
+      <p>«وكانت كافية.»</p>
+      <p>سكت آدم.</p>
+      <p>قال سليم:</p>
+      <p>«دعني أسألك سؤالًا.»</p>
+      <p>«تفضل.»</p>
+      <p>«هل جلست في مكان شخص آخر؟»</p>
+      <p>«لا.»</p>
+      <p>«هل أخذت شيئًا من أحد؟»</p>
+      <p>«لا.»</p>
+      <p>«هل منعت الشخص صاحب المقعد من الجلوس؟»</p>
+      <p>«لا.»</p>
+      <p>ابتسم سليم.</p>
+      <p>«إذن أين المشكلة؟»</p>
+      <p>قال آدم:</p>
+      <p>«في احترام النظام.»</p>
+      <p>هز سليم رأسه.</p>
+      <p>«أنت تحب النظام أكثر من اللازم.»</p>
+      <p>«والأنت تحب الفوضى أكثر من اللازم.»</p>
+      <p>ضحك سليم.</p>
+      <p>«أنا أحب الحياة كما هي.»</p>
+      <p>«وهذا ما تقوله الفوضى دائمًا عن نفسها.»</p>
+      <p>ضحك سليم مرة أخرى.</p>
+      <p>ثم قال:</p>
+      <p>«من كانت؟»</p>
+      <p>توقف آدم لحظة.</p>
+      <p>«لا أعرف.»</p>
+      <p>«لكنها أثارت اهتمامك.»</p>
+      <p>«أثارت اعتراضي.»</p>
+      <p>«الاعتراض أول الطريق أحيانًا.»</p>
+      <p>نظر آدم إليه.</p>
+      <p>«لا تبدأ.»</p>
+      <p>قال سليم:</p>
+      <p>«أنا لا أبدأ شيئًا. أنت الذي تتحدث عنها منذ عشر دقائق.»</p>
+      <p>نظر آدم إلى النافذة.</p>
+      <p>كان الشارع مزدحمًا.</p>
+      <p>سيارات تتحرك، أشخاص يعبرون، وأضواء تتغير.</p>
+      <p>قال:</p>
+      <p>«كانت تتحدث وكأن القواعد لا قيمة لها.»</p>
+      <p>رد سليم:</p>
+      <p>«ربما كانت تتحدث وكأن القواعد ليست كل شيء.»</p>
+      <p>لم يجب آدم.</p>
+      <p>كان الفرق بين الجملتين صغيرًا.</p>
+      <p>لكنه بدأ يشعر أن الفرق بينهما قد يكون أكبر مما يبدو.</p>
+      <p>في تلك الليلة، عاد إلى منزله متأخرًا.</p>
+      <p>وضع مفاتيحه في مكانها المعتاد.</p>
+      <p>خلع معطفه.</p>
+      <p>رتب أوراقه.</p>
+      <p>ثم وقف أمام مكتبه دون أن يفعل شيئًا.</p>
+      <p>تذكر صوتها:</p>
+      <p>«البروتوكول ينظم المكان، لا يملك الإنسان.»</p>
+      <p>ردد الجملة في ذهنه.</p>
+      <p>ثم قال لنفسه:</p>
+      <p>«لكن الإنسان يحتاج إلى قواعد.»</p>
+      <p>وبعد لحظة أضاف:</p>
+      <p>«أليس كذلك؟»</p>
+      <p>لم يجب أحد.</p>
+      <p>وكان ذلك أول مرة يشعر فيها آدم أن السؤال الذي طرحه على نفسه لم يكن ينتظر منه جوابًا سريعًا.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 8 - المرأة التي لا تخاف من الاختلاف -->
+  <section class="section" id="ch-8">
+    <span class="section-number">§ 08</span>
+    <h2 class="section-title">المرأة التي لا تخاف من الاختلاف</h2>
+    <div class="content">
+      <p>في اليوم التالي، لم يكن آدم يتوقع أن يراها.</p>
+      <p>لكن الحياة كانت تملك طريقتها الخاصة في إعادة الأشخاص إلى الأماكن التي لم نخطط للعودة إليها.</p>
+      <p>كان يقف أمام رف من الكتب في مكتبة صغيرة، حين سمع صوتًا خلفه:</p>
+      <p>«هل وجدت الإجابة؟»</p>
+      <p>التفت.</p>
+      <p>كانت ليان.</p>
+      <p>نظر إليها لحظة، ثم قال:</p>
+      <p>«أي إجابة؟»</p>
+      <p>«إجابة المقعد.»</p>
+      <p>قال:</p>
+      <p>«لا أظن أن هناك إجابة واحدة.»</p>
+      <p>ابتسمت.</p>
+      <p>«هذه بداية جيدة.»</p>
+      <p>قال:</p>
+      <p>«هل جئت إلى المكتبة لتناقشيني؟»</p>
+      <p>«لا. جئت لأبحث عن كتاب.»</p>
+      <p>«عن ماذا؟»</p>
+      <p>نظرت إلى الكتب أمامها.</p>
+      <p>«عن الإنسان.»</p>
+      <p>قال:</p>
+      <p>«موضوع واسع.»</p>
+      <p>«لهذا أحتاج إلى كتاب.»</p>
+      <p>ابتسم رغمًا عنه.</p>
+      <p>ثم قال:</p>
+      <p>«أنت لا تخافين من الاختلاف.»</p>
+      <p>نظرت إليه.</p>
+      <p>«هل يجب أن أخاف؟»</p>
+      <p>«أحيانًا الاختلاف يسبب مشاكل.»</p>
+      <p>«والتشابه أيضًا.»</p>
+      <p>«كيف؟»</p>
+      <p>قالت:</p>
+      <p>«عندما يتشابه الناس في كل شيء، يتوقفون عن سؤال بعضهم بعضًا.»</p>
+      <p>سكت آدم.</p>
+      <p>ثم سأل:</p>
+      <p>«وهل ترين أن الاختلاف قيمة بحد ذاته؟»</p>
+      <p>«لا.»</p>
+      <p>تفاجأ.</p>
+      <p>«لماذا؟»</p>
+      <p>«لأن الإنسان قد يختلف لمجرد أن يختلف. وهذا ليس حرية، بل عادة أخرى.»</p>
+      <p>نظر إليها باهتمام.</p>
+      <p>كانت المرة الأولى التي يسمع منها شيئًا لا يناقضه تمامًا.</p>
+      <p>قال:</p>
+      <p>«إذن أنت لا ترفضين القواعد.»</p>
+      <p>«ومن قال إنني أرفضها؟»</p>
+      <p>«تصرفك بالأمس.»</p>
+      <p>قالت:</p>
+      <p>«أنا أرفض القاعدة عندما تصبح أهم من الإنسان.»</p>
+      <p>«ومن يحدد متى تصبح كذلك؟»</p>
+      <p>أجابته بعد صمت:</p>
+      <p>«هذا هو الجزء الصعب.»</p>
+      <p>ثم أضافت:</p>
+      <p>«لذلك لا أحب الناس الذين يملكون إجابات جاهزة لكل شيء.»</p>
+      <p>قال آدم:</p>
+      <p>«وأنا لا أحب الناس الذين لا يملكون إجابات.»</p>
+      <p>«إذن نحن مختلفان.»</p>
+      <p>«واضح.»</p>
+      <p>ابتسمت.</p>
+      <p>ثم أخذت كتابًا من الرف.</p>
+      <p>قال آدم:</p>
+      <p>«هل هذا هو الكتاب الذي تبحثين عنه؟»</p>
+      <p>نظرت إلى الغلاف.</p>
+      <p>«لا أعرف.»</p>
+      <p>«كيف ستعرفين؟»</p>
+      <p>قالت:</p>
+      <p>«سأقرأه.»</p>
+      <p>«وماذا لو لم يعجبك؟»</p>
+      <p>أعادت الكتاب إلى مكانه.</p>
+      <p>«أعيده.»</p>
+      <p>ثم نظرت إليه وقالت:</p>
+      <p>«ليست كل الأشياء التي نختارها يجب أن تبقى معنا إلى النهاية.»</p>
+      <p>غادرت الرف، وبقي آدم ينظر إلى الكتاب.</p>
+      <p>لم يكن يعرف لماذا شعر أن الجملة الأخيرة لم تكن تتحدث عن كتاب.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 9 -->
+  <section class="section" id="ch-9">
+    <span class="section-number">§ 09</span>
+    <h2 class="section-title">ما بين الاحترام والطاعة</h2>
+    <div class="content">
+      <p>لم يكن آدم يحب أن يخسر النقاش.</p>
+      <p>ولم يكن يحب أكثر أن يكتشف أن الطرف الآخر ربما كان على حق.</p>
+      <p>في اليوم الثالث، التقيا مرة أخرى.</p>
+      <p>لم يكن اللقاء مخططًا له.</p>
+      <p>كانت ليان تقف عند مدخل القاعة، تقرأ برنامج المناسبة، بينما كان آدم يتحدث مع أحد المنظمين.</p>
+      <p>لمحها.</p>
+      <p>ثم حاول أن يتجاهل وجودها.</p>
+      <p>لاحظت ذلك.</p>
+      <p>قالت:</p>
+      <p>«هذه المرة لن أجلس في مقعدك.»</p>
+      <p>التفت إليها.</p>
+      <p>«لم يكن مقعدي.»</p>
+      <p>«إذن أنت تتحسن.»</p>
+      <p>ابتسم.</p>
+      <p>قال:</p>
+      <p>«وأنت لا تزالين تستفزين الناس.»</p>
+      <p>«فقط الذين يستحقون الاستفزاز.»</p>
+      <p>«ومن يقرر ذلك؟»</p>
+      <p>«الناس عادة يقررون بأنفسهم.»</p>
+      <p>اقترب آدم قليلًا.</p>
+      <p>قال:</p>
+      <p>«أريد أن أسألك شيئًا.»</p>
+      <p>«تفضل.»</p>
+      <p>«هل تعتقدين أن احترام الإنسان للسلطة يعني بالضرورة أنه خائف منها؟»</p>
+      <p>«لا.»</p>
+      <p>«إذن ما الفرق؟»</p>
+      <p>قالت:</p>
+      <p>«الاحترام يترك لك القدرة على الاختلاف. الخوف يسحبها منك.»</p>
+      <p>ظل ينظر إليها.</p>
+      <p>تابعت:</p>
+      <p>«يمكنني أن أحترمك وأقول لك إنني لا أتفق معك.»</p>
+      <p>«لكن ماذا لو كنت صاحب القرار؟»</p>
+      <p>«سأظل أختلف معك إن كان هناك سبب للاختلاف.»</p>
+      <p>«وهل تقبلين أن يختلف الناس معك عندما تكونين صاحبة القرار؟»</p>
+      <p>«إذا كنت أطلب منهم احترام القرار، فعليّ أن أتحمل اختلافهم معه.»</p>
+      <p>قال آدم:</p>
+      <p>«حتى لو كانوا مخطئين؟»</p>
+      <p>«نعم.»</p>
+      <p>«ولماذا؟»</p>
+      <p>قالت:</p>
+      <p>«لأن حقي في القرار لا يجعلني مالكة لعقولهم.»</p>
+      <p>سكت آدم.</p>
+      <p>ثم قال:</p>
+      <p>«هذا كلام جميل، لكنه لا يعمل دائمًا في الواقع.»</p>
+      <p>«أعرف.»</p>
+      <p>«إذن؟»</p>
+      <p>«كون الشيء صعبًا لا يعني أنه يصبح خطأ.»</p>
+      <p>مرّ رجل بالقرب منهما، وألقى التحية على آدم.</p>
+      <p>رد آدم التحية، ثم عاد إليها.</p>
+      <p>قال:</p>
+      <p>«أحيانًا يحتاج المجتمع إلى الطاعة.»</p>
+      <p>«ربما.»</p>
+      <p>«إذن أنت لا ترفضين الطاعة تمامًا.»</p>
+      <p>«لا أرفضها، لكنني لا أخلط بينها وبين الاحترام.»</p>
+      <p>«ما الفرق؟»</p>
+      <p>قالت:</p>
+      <p>«قد أطيعك لأنك أقوى مني. وقد أطيعك لأن القانون يلزمني. وقد أطيعك لأنني أثق بك. وقد أطيعك لأنني أرى أن ما تطلبه صحيح.»</p>
+      <p>ثم توقفت.</p>
+      <p>«لكن هذه أسباب مختلفة.»</p>
+      <p>قال آدم:</p>
+      <p>«والنتيجة واحدة.»</p>
+      <p>هزت رأسها.</p>
+      <p>«لا. النتيجة الظاهرة قد تكون واحدة. أما الإنسان من الداخل فليس واحدًا.»</p>
+      <p>كانت هذه المرة مختلفة.</p>
+      <p>لم يشعر آدم أنها تجادله.</p>
+      <p>شعر أنها تضع أمامه مرآة.</p>
+      <p>قال:</p>
+      <p>«هل ترين أن الطاعة قد تكون مهينة؟»</p>
+      <p>«أحيانًا.»</p>
+      <p>«ومتى؟»</p>
+      <p>قالت:</p>
+      <p>«عندما يطلب منك أحد أن تتخلى عن كرامتك لكي تثبت له أنك تحترمه.»</p>
+      <p>بقي آدم صامتًا.</p>
+      <p>ثم سأل:</p>
+      <p>«وهل يمكن للإنسان أن يرفض دون أن يكون وقحًا؟»</p>
+      <p>ابتسمت.</p>
+      <p>«هذا هو الأدب الحقيقي.»</p>
+      <p>«أن ترفض؟»</p>
+      <p>«أن تعرف كيف ترفض دون أن تهين، وكيف تختلف دون أن تحتقر، وكيف تتمسك بحدودك دون أن تجعلها سلاحًا ضد الآخرين.»</p>
+      <p>ثم أضافت:</p>
+      <p>«الاحترام ليس أن تقول نعم دائمًا.»</p>
+      <p>قال آدم:</p>
+      <p>«فماذا يكون؟»</p>
+      <p>نظرت إليه مباشرة.</p>
+      <p>«أن تعترف بأن الآخر إنسان مثلك.»</p>
+      <p>لم يعرف آدم لماذا بقيت الجملة معه حتى بعد أن افترقا.</p>
+      <p>لكنها بقيت.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 10 -->
+  <section class="section" id="ch-10">
+    <span class="section-number">§ 10</span>
+    <h2 class="section-title">الصمت الأول</h2>
+    <div class="content">
+      <p>بعد ذلك اللقاء، مرّت عدة أيام دون أن يتحدث آدم وليان.</p>
+      <p>لم يكن بينهما خلاف.</p>
+      <p>ولم يكن بينهما اتفاق.</p>
+      <p>كان بينهما شيء ثالث:</p>
+      <p>صمت بدأ قبل أن يعرف أي منهما ماذا يعني.</p>
+      <p>كان آدم يراها أحيانًا من بعيد.</p>
+      <p>في الممر.</p>
+      <p>عند الباب.</p>
+      <p>بين مجموعة من الأشخاص.</p>
+      <p>وكانت هي تراه أيضًا.</p>
+      <p>لكن لا أحد منهما كان يقترب.</p>
+      <p>في البداية ظن آدم أن الأمر لا يعنيه.</p>
+      <p>ثم اكتشف أن الإنسان يستطيع أن يكذب على نفسه بسهولة أكبر عندما لا يجد من يراجعه.</p>
+      <p>في إحدى الأمسيات، جلس وحده في القاعة بعد انتهاء الاجتماع.</p>
+      <p>كانت الكراسي تُجمع.</p>
+      <p>والأوراق تُرفع.</p>
+      <p>والأصوات تخف شيئًا فشيئًا.</p>
+      <p>بقي مقعد واحد في الجهة المقابلة.</p>
+      <p>المقعد نفسه.</p>
+      <p>أو هكذا ظن.</p>
+      <p>ابتسم عندما أدرك سخافة الفكرة.</p>
+      <p>كيف يمكن لمقعد أن يصبح علامة؟</p>
+      <p>لكنه لم يكن يفكر في المقعد.</p>
+      <p>كان يفكر في الجملة التي قيلت عنده.</p>
+      <p>«البروتوكول ينظم المكان، لا يملك الإنسان.»</p>
+      <p>دخلت مريم القاعة.</p>
+      <p>كانت امرأة أكبر سنًا، تعرف آدم منذ سنوات، وتملك تلك القدرة الغريبة على ملاحظة ما يحاول الناس إخفاءه.</p>
+      <p>قالت:</p>
+      <p>«ما الذي تفكر فيه؟»</p>
+      <p>أجاب:</p>
+      <p>«لا شيء.»</p>
+      <p>نظرت إلى المقعد الفارغ.</p>
+      <p>ثم إليه.</p>
+      <p>وقالت:</p>
+      <p>«الناس لا يجلسون أمام لا شيء بهذه الطريقة.»</p>
+      <p>ابتسم آدم.</p>
+      <p>«أنت أيضًا بدأت تتحدثين بالألغاز؟»</p>
+      <p>جلست في المقعد المقابل.</p>
+      <p>قالت:</p>
+      <p>«أنا أسأل فقط.»</p>
+      <p>«عن ماذا؟»</p>
+      <p>«عن السبب الذي جعلك تأتي إلى هنا بعد أن انتهى الجميع.»</p>
+      <p>قال:</p>
+      <p>«ربما أحب الهدوء.»</p>
+      <p>قالت:</p>
+      <p>«الهدوء شيء. والباقي في مكان فارغ شيء آخر.»</p>
+      <p>نظر إليها.</p>
+      <p>«هل تعتقدين أن كل شيء له معنى؟»</p>
+      <p>«لا.»</p>
+      <p>«إذن؟»</p>
+      <p>«أعتقد أن الإنسان هو الذي يعطي بعض الأشياء معناها.»</p>
+      <p>سكت.</p>
+      <p>ثم قال:</p>
+      <p>«هل تعرفين ليان؟»</p>
+      <p>ابتسمت مريم.</p>
+      <p>«الآن عرفت سبب المقعد.»</p>
+      <p>«لم أقل شيئًا.»</p>
+      <p>«لم تحتج إلى ذلك.»</p>
+      <p>أطرق آدم.</p>
+      <p>قالت مريم:</p>
+      <p>«هي لا تحب أن يقرر الآخرون من تكون.»</p>
+      <p>رفع رأسه.</p>
+      <p>«هل تعرفينها جيدًا؟»</p>
+      <p>«أعرفها بما يكفي لأعرف أنني لا أعرفها كلها.»</p>
+      <p>استغرب آدم الجواب.</p>
+      <p>قال:</p>
+      <p>«هذا جواب غريب.»</p>
+      <p>«بل هو الجواب الوحيد الصادق عن الناس.»</p>
+      <p>ثم تابعت:</p>
+      <p>«نحن نعرف من الآخرين ما يسمحون لنا بمعرفته، وما نظنه عنهم، وما رأيناه منهم في لحظات محددة.»</p>
+      <p>«وهذا يكفي أحيانًا.»</p>
+      <p>«للتعامل معهم، ربما. لكن ليس للحكم عليهم.»</p>
+      <p>صمت آدم.</p>
+      <p>قالت مريم:</p>
+      <p>«لا تجعل من خلاف صغير قصة كبيرة.»</p>
+      <p>«أنا لا أفعل.»</p>
+      <p>«إذن لا تفعل العكس أيضًا.»</p>
+      <p>«ما العكس؟»</p>
+      <p>«لا تجعل من إعجاب صغير حقيقة كبيرة.»</p>
+      <p>رفع آدم عينيه إليها بسرعة.</p>
+      <p>ضحكت.</p>
+      <p>«لم أقل إنك معجب بها.»</p>
+      <p>قال:</p>
+      <p>«لكن هذا ما فهمته.»</p>
+      <p>«إذن ربما أنت الذي قلت ذلك، لا أنا.»</p>
+      <p>نهضت مريم.</p>
+      <p>ثم قالت:</p>
+      <p>«هناك فرق بين أن ترى شخصًا، وأن ترى الصورة التي صنعتها عنه في رأسك.»</p>
+      <p>وقبل أن تغادر، توقفت لحظة وقالت:</p>
+      <p>«لا تستعجل في رسم صورتها.»</p>
+      <p>ثم خرجت.</p>
+      <p>بقي آدم وحده.</p>
+      <p>نظر إلى المقعد الفارغ.</p>
+      <p>وللمرة الأولى لم يسأل:</p>
+      <p>من يملك هذا المكان؟</p>
+      <p>بل سأل:</p>
+      <p>من تكون ليان فعلًا؟</p>
+    </div>
+  </section>
+
+  <!-- PART 2 -->
+  <div class="part-header" id="part-2">
+    <span class="part-label">الجزء الثاني</span>
+    <h1>الصورة</h1>
+  </div>
+
+  <section class="section" id="ch-11">
+    <div class="content">
+      <p>كان آدم يظن أن معرفة الإنسان تبدأ من ملاحظته.</p>
+      <p>ثم اكتشف أن الملاحظة قد تكون بداية الخطأ.</p>
+      <p>فالإنسان لا يرى الآخر كما هو.</p>
+      <p>يراه من خلال ذاكرته، وتجاربه، وخوفه، وتوقعاته، والصور التي كوّنها قبل أن يعرفه.</p>
+      <p>وقد تكون الصورة دقيقة.</p>
+      <p>وقد تكون ظالمة.</p>
+      <p>لكن المشكلة الأكبر أن الإنسان نادرًا ما يعرف الفرق بينهما.</p>
+      <p>في الأيام التالية، بدأ آدم يلاحظ ليان أكثر.</p>
+      <p>ولم يكن يعرف أن الملاحظة، حين تخرج عن حدودها، يمكن أن تتحول إلى محاولة امتلاك صورة الآخر.</p>
+      <p>كان يراها هادئة مع بعض الناس، حادة مع آخرين، صامتة في مواقف، ومتحدثة في مواقف أخرى.</p>
+      <p>مرة وجدها تساعد رجلًا مسنًا على حمل بعض الأوراق.</p>
+      <p>ومرة رآها ترفض طلبًا بطريقة قاطعة.</p>
+      <p>وفي مرة ثالثة، رآها تضحك بصوت مرتفع مع صديقتها.</p>
+      <p>كل مشهد كان يضيف شيئًا إلى الصورة التي يرسمها عنها.</p>
+      <p>وكانت الصورة تكبر.</p>
+      <p>حتى نسي أنها ليست ليان.</p>
+      <p>إنها فقط:</p>
+      <p>ليان كما رآها هو.</p>
+      <p>وفي مساء يوم طويل، جلس آدم أمام نافذة منزله، وتذكر جملة مريم:</p>
+      <p>«لا تستعجل في رسم صورتها.»</p>
+      <p>ابتسم.</p>
+      <p>ثم أدرك أنه رسمها بالفعل.</p>
+      <p>ولم تستغرق الصورة منه سوى أيام قليلة.</p>
+      <p>وكان عليه الآن أن يعرف:</p>
+      <p>هل كانت ليان فعلًا كما تخيلها؟</p>
+      <p>أم أنه كان يرى نفسه فيها؟</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 12 -->
+  <section class="section" id="ch-12">
+    <span class="section-number">§ 12</span>
+    <h2 class="section-title">الصورة التي رسمها الآخرون</h2>
+    <div class="content">
+      <p>في اليوم التالي، وصلت ليان إلى المكان قبل الموعد.</p>
+      <p>لم تكن تحب الوصول مبكرًا، لكنها كانت تعرف أن بعض اللقاءات تحتاج إلى دقائق من الهدوء قبل أن تبدأ الضوضاء.</p>
+      <p>وجدت مريم وحدها في إحدى الزوايا.</p>
+      <p>قالت مريم:</p>
+      <p>«أنت اليوم صامتة أكثر من المعتاد.»</p>
+      <p>قالت ليان:</p>
+      <p>«ربما لأنني أفكر.»</p>
+      <p>«في ماذا؟»</p>
+      <p>نظرت ليان إلى القاعة.</p>
+      <p>«في الطريقة التي يقرر بها الناس من نكون.»</p>
+      <p>ابتسمت مريم.</p>
+      <p>«هذه مشكلة قديمة.»</p>
+      <p>«لكنها لا تصبح أقل إزعاجًا لأنها قديمة.»</p>
+      <p>جلست مريم.</p>
+      <p>قالت:</p>
+      <p>«هل قال لك أحد شيئًا؟»</p>
+      <p>«ليس مباشرة.»</p>
+      <p>«وهذا يعني؟»</p>
+      <p>«أنهم قالوه من وراء ظهري.»</p>
+      <p>سكتت مريم.</p>
+      <p>قالت ليان:</p>
+      <p>«أحيانًا أشعر أن الناس لا يريدون أن يعرفوا الإنسان. يريدون فقط أن يجدوا له اسمًا.»</p>
+      <p>«مثل ماذا؟»</p>
+      <p>«هادئة. عنيدة. محترمة. صعبة. مؤدبة. متمردة. قوية. حساسة.»</p>
+      <p>ثم ابتسمت بسخرية خفيفة.</p>
+      <p>«يضعون الكلمة، ثم يشعرون أنهم انتهوا من فهمك.»</p>
+      <p>قالت مريم:</p>
+      <p>«لأن الفهم الحقيقي يحتاج وقتًا.»</p>
+      <p>«والناس لا يحبون الأشياء التي تحتاج وقتًا.»</p>
+      <p>«ولا يحبون الأشياء التي لا يمكن السيطرة عليها.»</p>
+      <p>نظرت ليان إليها.</p>
+      <p>«هل ترين أن الإنسان الذي لا يستطيعون فهمه يصبح مخيفًا لهم؟»</p>
+      <p>«أحيانًا.»</p>
+      <p>ثم أضافت:</p>
+      <p>«لكن هناك شيئًا آخر.»</p>
+      <p>«ما هو؟»</p>
+      <p>«الإنسان نفسه أحيانًا يخاف من أن يخرج عن الصورة التي رسمها الناس له.»</p>
+      <p>صمتت ليان.</p>
+      <p>كانت تعرف أن هذا صحيح.</p>
+      <p>ربما أكثر مما تحب الاعتراف به.</p>
+      <p>قالت:</p>
+      <p>«أصعب صورة هي التي تصنعها عن نفسك.»</p>
+      <p>قالت مريم:</p>
+      <p>«لأنك لا تستطيع مغادرتها بسهولة.»</p>
+      <p>في تلك اللحظة دخل آدم.</p>
+      <p>رآهما.</p>
+      <p>توقف لحظة.</p>
+      <p>ثم تقدم.</p>
+      <p>قالت مريم:</p>
+      <p>«سأترككما.»</p>
+      <p>وقبل أن تغادر، نظرت إلى آدم نظرة قصيرة، ثم إلى ليان.</p>
+      <p>فهم آدم أنها تعرف أكثر مما تقول.</p>
+      <p>جلست ليان.</p>
+      <p>قال آدم:</p>
+      <p>«هل تحدثتِ مع مريم عني؟»</p>
+      <p>نظرت إليه باستغراب.</p>
+      <p>«لماذا؟»</p>
+      <p>«لأنها نظرت إليّ بطريقة غريبة.»</p>
+      <p>«ربما لأنك تنظر إلى الناس كثيرًا.»</p>
+      <p>ابتسم.</p>
+      <p>«ربما.»</p>
+      <p>جلس قبالتها.</p>
+      <p>مرّت لحظة صمت.</p>
+      <p>ثم قال:</p>
+      <p>«هل يزعجك أن يحكم عليك الناس؟»</p>
+      <p>«نعم.»</p>
+      <p>«حتى لو كانوا محقين؟»</p>
+      <p>فكرت قليلًا.</p>
+      <p>«إذا كانوا محقين في وصف فعل قمت به، فهذا شيء يمكنني مراجعته. أما إذا ظنوا أنهم عرفوا شخصيتي كلها من موقف واحد، فهذا شيء آخر.»</p>
+      <p>قال آدم:</p>
+      <p>«إذن أنت تفرقين بين الفعل والشخص.»</p>
+      <p>«أليس من الظلم أن نحكم على الإنسان كله من أسوأ لحظة مر بها؟»</p>
+      <p>لم يجب.</p>
+      <p>تابعت:</p>
+      <p>«أنت فعلت ذلك معي.»</p>
+      <p>«متى؟»</p>
+      <p>«منذ المقعد.»</p>
+      <p>نظر إليها.</p>
+      <p>«ربما.»</p>
+      <p>قالت:</p>
+      <p>«رأيت رجلًا يحب القواعد، فقررت أنني امرأة لا تحترمها.»</p>
+      <p>سكت آدم.</p>
+      <p>«هل هذا ما فعلته؟»</p>
+      <p>قال بعد لحظة:</p>
+      <p>«نعم.»</p>
+      <p>«ولماذا؟»</p>
+      <p>«لأنني لم أعرفك.»</p>
+      <p>ابتسمت.</p>
+      <p>«هذه أول إجابة صادقة منك.»</p>
+      <p>ثم قالت:</p>
+      <p>«وأنا أيضًا لم أعرفك.»</p>
+      <p>رفع عينيه إليها.</p>
+      <p>«ماذا ظننتِ؟»</p>
+      <p>«ظننت أنك رجل يختبئ خلف القواعد.»</p>
+      <p>«وهل أنا كذلك؟»</p>
+      <p>قالت:</p>
+      <p>«لا أعرف بعد.»</p>
+      <p>لأول مرة شعر آدم أن عدم المعرفة قد يكون أكثر احترامًا من الحكم.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 13 -->
+  <section class="section" id="ch-13">
+    <span class="section-number">§ 13</span>
+    <h2 class="section-title">المرأة التي رفضت أن تكون صورة</h2>
+    <div class="content">
+      <p>لم تكن ليان تحاول أن تكون مختلفة.</p>
+      <p>كانت فقط ترفض أن تعيش وفق الصورة التي يريدها الآخرون.</p>
+      <p>وهذا، في نظر بعض الناس، كان اختلافًا بحد ذاته.</p>
+      <p>كانت تعرف أن المرأة تُراقب أحيانًا بطريقة مختلفة.</p>
+      <p>إذا تكلمت كثيرًا قيل إنها جريئة أكثر مما ينبغي.</p>
+      <p>وإذا صمتت قيل إنها متكبرة.</p>
+      <p>إذا رفضت قيل إنها صعبة.</p>
+      <p>وإذا وافقت دائمًا قيل إنها مثالية.</p>
+      <p>وإذا اختارت لنفسها قيل إنها لا تحسب حسابًا للآخرين.</p>
+      <p>وكان السؤال الذي يزعجها:</p>
+      <p>لماذا يجب أن تكون المرأة دائمًا نسخة من الصورة التي يريدها المجتمع؟</p>
+      <p>لماذا لا يكفي أن تكون إنسانة تخطئ وتصيب، توافق وترفض، تتغير وتنضج، وتتعلم من حياتها؟</p>
+      <p>في مساء هادئ، كانت تجلس مع صديقتها عندما قالت لها:</p>
+      <p>«أنت تغيرت.»</p>
+      <p>ابتسمت ليان.</p>
+      <p>«كل الناس يتغيرون.»</p>
+      <p>«لكن أنت تغيرت أكثر.»</p>
+      <p>«ربما لأنني توقفت عن محاولة إرضاء الجميع.»</p>
+      <p>سكتت صديقتها.</p>
+      <p>ثم قالت:</p>
+      <p>«ألا تخافين أن يسيء الناس فهمك؟»</p>
+      <p>«بلى.»</p>
+      <p>«إذن؟»</p>
+      <p>قالت ليان:</p>
+      <p>«الخوف من سوء فهم الناس ليس سببًا كافيًا لأعيش حياتي كما يريدون.»</p>
+      <p>«لكن الإنسان يحتاج إلى الناس.»</p>
+      <p>«بالتأكيد.»</p>
+      <p>«ويحتاج إلى احترامهم.»</p>
+      <p>«بالتأكيد.»</p>
+      <p>«فأين الحد؟»</p>
+      <p>نظرت ليان إليها طويلًا.</p>
+      <p>ثم قالت:</p>
+      <p>«عندما يصبح احترام الناس سببًا في أن أخون نفسي.»</p>
+      <p>كانت تعرف أن الحدود ليست سهلة.</p>
+      <p>فالإنسان لا يعيش وحده.</p>
+      <p>ولا يستطيع أن يقول:</p>
+      <p>«أنا حر»</p>
+      <p>ثم يستخدم هذه الحرية لإيذاء الآخرين.</p>
+      <p>لكنها كانت تعرف أيضًا أن المجتمع لا يملك الإنسان بالكامل.</p>
+      <p>وأن احترام العائلة لا يعني إلغاء الشخصية.</p>
+      <p>واحترام الرجل لا يعني أن المرأة تفقد حقها في الرفض.</p>
+      <p>والحب لا يعني أن أحد الطرفين يصبح مالكًا للآخر.</p>
+      <p>كانت تؤمن أن الإنسان مسؤول عن أثره في الآخرين، لكن الآخرين ليسوا مالكين لحياته.</p>
+      <p>في اليوم التالي، التقت بآدم.</p>
+      <p>قال لها:</p>
+      <p>«سمعت شيئًا عنك.»</p>
+      <p>قالت:</p>
+      <p>«الناس يسمعون أشياء كثيرة.»</p>
+      <p>«يقولون إنك لا تحبين الالتزام.»</p>
+      <p>نظرت إليه بهدوء.</p>
+      <p>«هل صدقتهم؟»</p>
+      <p>«لا أعرف.»</p>
+      <p>«إذن لماذا تسألني؟»</p>
+      <p>فكر لحظة.</p>
+      <p>ثم قال:</p>
+      <p>«لأنني لا أريد أن أعرفك من كلامهم.»</p>
+      <p>ابتسمت.</p>
+      <p>«هذه خطوة جيدة.»</p>
+      <p>«وهل تحبين الالتزام؟»</p>
+      <p>«عندما يكون التزامًا بشيء أؤمن به.»</p>
+      <p>«وماذا عن الالتزام بما يراه الناس صحيحًا؟»</p>
+      <p>«أستمع إليهم. لكنني لا أعطيهم مفاتيح حياتي.»</p>
+      <p>سألها:</p>
+      <p>«وماذا لو أخطأتِ؟»</p>
+      <p>قالت:</p>
+      <p>«سأتحمل خطئي.»</p>
+      <p>«حتى لو لامك الجميع؟»</p>
+      <p>«نعم.»</p>
+      <p>ثم نظرت إليه وقالت:</p>
+      <p>«الحرية ليست أن أقول إنني لا أخطئ. الحرية أن أعرف أن قراري لي، وأن أتحمل نتيجته.»</p>
+      <p>تأمل آدم كلامها.</p>
+      <p>بدأ يكتشف أن ليان لم تكن تكره القواعد.</p>
+      <p>كانت تكره شيئًا آخر.</p>
+      <p>أن تتحول القاعدة إلى طريقة لإلغاء الإنسان.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 14 -->
+  <section class="section" id="ch-14">
+    <span class="section-number">§ 14</span>
+    <h2 class="section-title">المرآة</h2>
+    <div class="content">
+      <p>في صباح اليوم التالي، وقف آدم أمام المرآة وقتًا أطول من المعتاد.</p>
+      <p>لم يكن يبحث عن شيء في وجهه.</p>
+      <p>كان يحاول أن يرى الرجل الذي لا يراه الآخرون.</p>
+      <p>سأل نفسه:</p>
+      <p>ماذا أعرف عن نفسي؟</p>
+      <p>السؤال بدا غريبًا.</p>
+      <p>فهو يعرف اسمه، وعمره، وعمله، وعاداته، والأشياء التي يحبها ويكرهها.</p>
+      <p>لكن هل يعرف نفسه حقًا؟</p>
+      <p>أم يعرف فقط الصورة التي اعتاد أن يصدقها عنها؟</p>
+      <p>كان يرى نفسه رجلًا منظمًا.</p>
+      <p>هادئًا.</p>
+      <p>محترمًا.</p>
+      <p>مسؤولًا.</p>
+      <p>لكن هل كان الهدوء دائمًا حكمة؟</p>
+      <p>هل كان التنظيم دائمًا فضيلة؟</p>
+      <p>هل كان احترام القواعد دائمًا احترامًا للآخرين؟</p>
+      <p>أم أن بعضها كان خوفًا من الخطأ؟</p>
+      <p>تذكر أباه.</p>
+      <p>وتذكر الجملة القديمة:</p>
+      <p>«الناس لا يحترمون الرجل الذي لا يعرف حدوده.»</p>
+      <p>فكر فيها للمرة الأولى بطريقة مختلفة.</p>
+      <p>ماذا لو كان أبوه يقصد شيئًا صحيحًا، لكن آدم أخذ الجملة أبعد مما ينبغي؟</p>
+      <p>ماذا لو كان المقصود أن يعرف الإنسان حدوده حتى لا يؤذي الآخرين؟</p>
+      <p>وماذا لو كان آدم قد فهمها لاحقًا بأن يعرف حدود الآخرين أيضًا، وأن يطالبهم بالبقاء داخلها؟</p>
+      <p>كان الفرق دقيقًا.</p>
+      <p>لكنه فرق بين المسؤولية والسيطرة.</p>
+      <p>جلس أمام المرآة.</p>
+      <p>ثم قال بصوت منخفض:</p>
+      <p>«متى أصبح النظام الذي أحبه شيئًا أخاف أن أفقده؟»</p>
+      <p>لم يجد جوابًا.</p>
+      <p>وفي تلك اللحظة فهم شيئًا بسيطًا:</p>
+      <p>المرآة لا تكذب.</p>
+      <p>لكنها لا تخبرك من أنت أيضًا.</p>
+      <p>إنها فقط تعطيك وجهك.</p>
+      <p>أما المعنى، فعليك أن تبحث عنه بنفسك.</p>
+      <p>نهض آدم.</p>
+      <p>وأثناء خروجه، وصلته رسالة قصيرة من ليان.</p>
+      <p>قرأها مرة.</p>
+      <p>ثم مرة ثانية.</p>
+      <p>كانت تقول:</p>
+      <p>«أحيانًا لا نحتاج إلى أن نغيّر صورتنا عند الآخرين. نحتاج فقط إلى أن نتوقف عن تصديقها.»</p>
+      <p>بقي الهاتف في يده.</p>
+      <p>لم يعرف كيف عرفت ما كان يفكر فيه.</p>
+      <p>ثم أدرك أنها لم تعرف.</p>
+      <p>كانت تتحدث عن نفسها.</p>
+      <p>لكن الجملة أصابته هو أيضًا.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 15 -->
+  <section class="section" id="ch-15">
+    <span class="section-number">§ 15</span>
+    <h2 class="section-title">ما يراه الناس</h2>
+    <div class="content">
+      <p>كان الناس يرون آدم رجلًا يعرف ماذا يريد.</p>
+      <p>وهذا لم يكن صحيحًا تمامًا.</p>
+      <p>كان يعرف جيدًا ماذا يفعل، لكن معرفة ما يجب فعله ليست دائمًا معرفة بما نريد.</p>
+      <p>كان الناس يرون ليان امرأة قوية.</p>
+      <p>وهذا لم يكن صحيحًا تمامًا أيضًا.</p>
+      <p>كانت قوية في بعض الأيام، وخائفة في أيام أخرى، ومترددة في لحظات لا يراها أحد.</p>
+      <p>لكن الناس لا يرون إلا ما يظهر.</p>
+      <p>والصورة الخارجية لا تكذب بالضرورة، لكنها لا تقول الحقيقة كلها.</p>
+      <p>في إحدى الأمسيات، جلس آدم وليان في مكان هادئ بعيدًا عن القاعة.</p>
+      <p>لم يكن بينهما هذه المرة نقاش عن القواعد.</p>
+      <p>كان هناك شيء أكثر هدوءًا.</p>
+      <p>قال آدم:</p>
+      <p>«هل يهمك ما يراه الناس فيك؟»</p>
+      <p>فكرت.</p>
+      <p>«نعم.»</p>
+      <p>تفاجأ.</p>
+      <p>«كنت أظنك لا تهتمين.»</p>
+      <p>«لا أهتم أن أكون كما يريدون، لكن يهمني ألا أؤذي أحدًا دون سبب.»</p>
+      <p>قال:</p>
+      <p>«إذن رأي الناس مهم.»</p>
+      <p>«رأيهم في أثري على حياتهم مهم. أما رأيهم في شخصيتي، فليس كله من مسؤوليتي.»</p>
+      <p>قال آدم:</p>
+      <p>«وهل تستطيعين الفصل بين الاثنين؟»</p>
+      <p>«ليس دائمًا.»</p>
+      <p>ثم ابتسمت.</p>
+      <p>«لا أحد يستطيع.»</p>
+      <p>سكت آدم.</p>
+      <p>قالت:</p>
+      <p>«أنت أيضًا لست كما يراك الناس.»</p>
+      <p>«كيف ترينني؟»</p>
+      <p>نظرت إليه.</p>
+      <p>ثم قالت:</p>
+      <p>«لا أعرف بعد.»</p>
+      <p>ضحك.</p>
+      <p>«بدأت أكره هذه الإجابة.»</p>
+      <p>«لأنك تريد أن تعرف كيف أراك.»</p>
+      <p>«ربما.»</p>
+      <p>«ولماذا يهمك؟»</p>
+      <p>تردد.</p>
+      <p>ثم قال:</p>
+      <p>«لأنني لا أريد أن أكون في صورتك رجلًا لم أكنه.»</p>
+      <p>سكتت ليان.</p>
+      <p>ثم قالت:</p>
+      <p>«هذه أول مرة أراك فيها تهتم بالصورة من أجل ألا تظلم نفسك، لا من أجل أن تبدو جيدًا.»</p>
+      <p>نظر إليها.</p>
+      <p>وقال:</p>
+      <p>«ربما لأنني بدأت أفهم الفرق.»</p>
+      <p>كانت تلك بداية شيء جديد بينهما.</p>
+      <p>لم يكن حبًا.</p>
+      <p>ولم يكن وعدًا.</p>
+      <p>كان ثقة صغيرة، بدأت تتكون من الاعتراف بأن كل واحد منهما لا يعرف الآخر بالكامل.</p>
+      <p>وربما كانت تلك أفضل بداية ممكنة.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 16 -->
+  <section class="section" id="ch-16">
+    <span class="section-number">§ 16</span>
+    <h2 class="section-title">ما لا يراه الناس</h2>
+    <div class="content">
+      <p>في تلك الليلة، لم تستطع ليان النوم.</p>
+      <p>جلست قرب النافذة، والمدينة خلف الزجاج تبدو بعيدة، رغم أنها لم تكن كذلك.</p>
+      <p>كانت تفكر في أشياء لم تقلها لآدم.</p>
+      <p>لم تخبره أن الاختلاف لم يكن سهلًا عليها دائمًا.</p>
+      <p>ولم تخبره أن بعض قراراتها كلفتها أكثر مما يتخيل.</p>
+      <p>ولم تخبره أنها، في سنوات سابقة، اختارت الصمت في الوقت الذي كان ينبغي فيه أن تتكلم.</p>
+      <p>ولا أنها قالت «نعم» أحيانًا لأشياء كانت تريد أن تقول لها «لا».</p>
+      <p>كانت تخشى أن يظن الناس أن القوة تعني ألا تخاف.</p>
+      <p>لكنها كانت تعرف أن الإنسان قد يكون خائفًا ويتقدم رغم خوفه.</p>
+      <p>وربما كانت تلك هي القوة الحقيقية.</p>
+      <p>في مكان آخر من المدينة، كان آدم مستيقظًا أيضًا.</p>
+      <p>فتح دفترًا قديمًا.</p>
+      <p>وجد فيه ملاحظات كتبها قبل سنوات.</p>
+      <p>كان من بينها:</p>
+      <p>«الانضباط يمنع الفوضى.»</p>
+      <p>قرأها طويلًا.</p>
+      <p>ثم كتب تحتها:</p>
+      <p>«لكن من يمنع الانضباط من أن يتحول إلى قيد؟»</p>
+      <p>توقف.</p>
+      <p>ثم أضاف:</p>
+      <p>«ومن يقرر أين ينتهي القيد وتبدأ الحرية؟»</p>
+      <p>أغلق الدفتر.</p>
+      <p>لم يكن يعرف أن الأسئلة التي بدأها مقعد صغير ستأخذه يومًا إلى مكان أبعد بكثير.</p>
+      <p>مكان لن يكون السؤال فيه:</p>
+      <p>من يملك المقعد؟</p>
+      <p>بل:</p>
+      <p>من يملك القرار؟</p>
+      <p>ومن يملك الإنسان نفسه؟</p>
+      <p>وفي تلك الليلة، كان كل واحد منهما يعيش وحده مع الجزء الذي لا يراه الآخرون.</p>
+      <p>لم يكن أي منهما يعرف أن الأيام القادمة ستضع أمامهما حدثًا لن يستطيع أي منهما اختياره.</p>
+      <p>وحينها، لن تعود القواعد كافية.</p>
+      <p>ولا الصور.</p>
+      <p>ولا الكلمات.</p>
+      <p>سيبدأ الجزء الأصعب من الحكاية:</p>
+      <p>القدر.</p>
+    </div>
+  </section>
+
+  <!-- PART 3 -->
+  <div class="part-header" id="part-3">
+    <span class="part-label">الجزء الثالث</span>
+    <h1>القدر</h1>
+  </div>
+
+  <section class="section" id="ch-17">
+    <div class="content">
+      <p>كان آدم يعتقد أن أصعب القرارات هي التي تحتاج إلى شجاعة.</p>
+      <p>ثم اكتشف أن هناك أشياء أصعب:</p>
+      <p>أن تقف أمام شيء لم يكن قرارك أصلًا.</p>
+      <p>في الأسابيع التي سبقت ذلك المساء، كانت حياته تسير بطريقة هادئة.</p>
+      <p>لم تكن مثالية.</p>
+      <p>لكنها كانت مفهومة.</p>
+      <p>عمل.</p>
+      <p>مواعيد.</p>
+      <p>أصدقاء.</p>
+      <p>لقاءات قصيرة مع ليان بدأت تتحول شيئًا فشيئًا إلى مساحة ينتظرها.</p>
+      <p>لم يسمِّ ما بينهما.</p>
+      <p>ولم تسأله هي أن يسميه.</p>
+      <p>كان يكفيهما أن يتحدثا.</p>
+      <p>عن الكتب.</p>
+      <p>عن الناس.</p>
+      <p>عن القرارات.</p>
+      <p>عن الأشياء التي لا يعرفانها.</p>
+      <p>حتى جاء ذلك المساء.</p>
+      <p>كان المطر شديدًا.</p>
+      <p>والمدينة أقل ازدحامًا من المعتاد.</p>
+      <p>خرج آدم من عمله متأخرًا.</p>
+      <p>كان ينوي أن يمر على منزل والدته، ثم يعود إلى بيته.</p>
+      <p>لكن الهاتف رن.</p>
+      <p>كان المتصل أخوه.</p>
+      <p>صوته لم يكن طبيعيًا.</p>
+      <p>قال:</p>
+      <p>«آدم... تعال بسرعة.»</p>
+      <p>«ماذا حدث؟»</p>
+      <p>لم يجبه مباشرة.</p>
+      <p>ثم قال:</p>
+      <p>«أبي في المستشفى.»</p>
+      <p>توقف آدم في مكانه.</p>
+      <p>كل الأشياء التي كان يفكر فيها قبل ثوانٍ اختفت دفعة واحدة.</p>
+      <p>لم يسأل كيف.</p>
+      <p>لم يسأل لماذا.</p>
+      <p>قال فقط:</p>
+      <p>«أنا قادم.»</p>
+      <p>في الطريق، كانت الأسئلة تتسابق في رأسه.</p>
+      <p>ماذا حدث؟</p>
+      <p>هل هو بخير؟</p>
+      <p>لماذا لم يخبره أحد؟</p>
+      <p>هل كان يمكن منع ذلك؟</p>
+      <p>هل تأخر؟</p>
+      <p>هل كان يجب أن يزور والده في الأيام الماضية؟</p>
+      <p>هل كان ينبغي أن يتصل؟</p>
+      <p>كان يبحث عن شيء يستطيع أن يفعله.</p>
+      <p>لكن للمرة الأولى، لم يجد شيئًا.</p>
+      <p>وصل إلى المستشفى.</p>
+      <p>وجد أخاه واقفًا في الممر.</p>
+      <p>لم يقل شيئًا.</p>
+      <p>فهم آدم من وجهه أن الأمر أكبر مما قاله الهاتف.</p>
+      <p>اقترب منه.</p>
+      <p>«أين أبي؟»</p>
+      <p>أشار إلى الباب.</p>
+      <p>دخل آدم.</p>
+      <p>رأى الرجل الذي كان يبدو له طوال حياته أكثر ثباتًا من الجدران.</p>
+      <p>كان الآن مستلقيًا، صامتًا، ولا يملك من القوة التي عرفها عنه إلا ما يكفي ليبقى.</p>
+      <p>وقف آدم إلى جواره.</p>
+      <p>أمسك يده.</p>
+      <p>لم يقل شيئًا.</p>
+      <p>ولم يقل والده شيئًا.</p>
+      <p>في تلك اللحظة، لم تعد القواعد مهمة.</p>
+      <p>ولا المقاعد.</p>
+      <p>ولا الصورة التي رسمها الناس عنه.</p>
+      <p>كل ما بقي هو إنسان يقف أمام شيء لم يختره.</p>
+      <p>ولأول مرة، فهم آدم أن بعض الأسئلة لا تأتي لتجد جوابًا.</p>
+      <p>تأتي لتغيّر الإنسان الذي يسألها.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 18 -->
+  <section class="section" id="ch-18">
+    <span class="section-number">§ 18</span>
+    <h2 class="section-title">الشيء الذي لم يختره</h2>
+    <div class="content">
+      <p>بقي آدم في المستشفى حتى الصباح.</p>
+      <p>كان يجلس أحيانًا، ثم يقف، ثم يمشي في الممر، ثم يعود إلى الغرفة نفسها.</p>
+      <p>لم يكن يعرف ماذا يفعل.</p>
+      <p>وهذا ما كان يؤلمه أكثر.</p>
+      <p>الرجل الذي أمضى عمره يبحث عن الطريقة الصحيحة لفعل الأشياء وجد نفسه أمام شيء لا توجد له طريقة صحيحة.</p>
+      <p>في الصباح، خرج الطبيب.</p>
+      <p>تحدث مع العائلة.</p>
+      <p>كانت الكلمات هادئة، مهنية، واضحة.</p>
+      <p>لكنها لم تكن قادرة على جعل الحقيقة أقل قسوة.</p>
+      <p>قال الطبيب إن الساعات القادمة مهمة.</p>
+      <p>ثم تركهم.</p>
+      <p>جلس آدم على الكرسي في الممر.</p>
+      <p>نظر إلى يديه.</p>
+      <p>كان يتذكر والده.</p>
+      <p>صوته.</p>
+      <p>خطواته.</p>
+      <p>طريقته في ترتيب الأشياء.</p>
+      <p>الجمل التي كان يقولها.</p>
+      <p>والجمل التي لم يقلها.</p>
+      <p>فكر في كل السنوات التي ظن فيها أنه يفهم أباه.</p>
+      <p>ثم اكتشف أن الإنسان قد يعيش مع شخص عشرات السنين ولا يعرف إلا جزءًا منه.</p>
+      <p>دخلت مريم الممر.</p>
+      <p>كانت قد عرفت بالخبر من العائلة.</p>
+      <p>جلست إلى جواره.</p>
+      <p>لم تقل:</p>
+      <p>«كل شيء سيكون بخير.»</p>
+      <p>ولم تقل:</p>
+      <p>«كن قويًا.»</p>
+      <p>فهي تعرف أن بعض العبارات تبدو جميلة فقط لأنها لا تعرف ماذا تقول.</p>
+      <p>قالت:</p>
+      <p>«أنا هنا.»</p>
+      <p>نظر إليها آدم.</p>
+      <p>كانت الجملة قصيرة.</p>
+      <p>لكنها كانت كافية.</p>
+      <p>بعد صمت طويل قال:</p>
+      <p>«لم أختر هذا.»</p>
+      <p>قالت:</p>
+      <p>«أعرف.»</p>
+      <p>«لم أختر أن يكون أبي هنا.»</p>
+      <p>«أعرف.»</p>
+      <p>«لم أختر أن أخاف.»</p>
+      <p>«أعرف.»</p>
+      <p>ثم سألها:</p>
+      <p>«إذن لماذا أشعر أنني مسؤول عن كل شيء؟»</p>
+      <p>نظرت إليه.</p>
+      <p>وقالت:</p>
+      <p>«لأنك تحاول أن تجد لنفسك شيئًا تستطيع السيطرة عليه.»</p>
+      <p>«ولا يوجد شيء.»</p>
+      <p>«هناك شيء.»</p>
+      <p>«ما هو؟»</p>
+      <p>قالت:</p>
+      <p>«كيف ستكون الآن.»</p>
+      <p>بقي صامتًا.</p>
+      <p>قالت:</p>
+      <p>«أنت لا تختار المرض. ولا تختار الخوف. ولا تختار كل ما سيحدث بعده.»</p>
+      <p>ثم أضافت:</p>
+      <p>«لكن هذا لا يعني أن كل شيء انتهى من يدك.»</p>
+      <p>نظر إليها.</p>
+      <p>«ماذا بقي لي؟»</p>
+      <p>قالت:</p>
+      <p>«موقفك.»</p>
+      <p>لم تعجبه الكلمة.</p>
+      <p>بدت صغيرة جدًا أمام ما يحدث.</p>
+      <p>قال:</p>
+      <p>«موقفي لن يغير ما حدث.»</p>
+      <p>«ربما لا.»</p>
+      <p>«إذن ما فائدته؟»</p>
+      <p>قالت:</p>
+      <p>«قد لا يغير الحدث. لكنه قد يغير الإنسان الذي يخرج منه.»</p>
+      <p>لم يجب.</p>
+      <p>كانت هذه أول مرة يسمع فيها آدم فكرة المسؤولية دون أن يشعر أنها اتهام.</p>
+      <p>المسؤولية لم تكن دائمًا:</p>
+      <p>«أنت السبب.»</p>
+      <p>أحيانًا كانت تعني:</p>
+      <p>«ماذا ستفعل الآن؟»</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 19 -->
+  <section class="section" id="ch-19">
+    <span class="section-number">§ 19</span>
+    <h2 class="section-title">حين لا يكفي الاختيار</h2>
+    <div class="content">
+      <p>مرت أيام ثقيلة.</p>
+      <p>تحسنت حالة والده قليلًا، ثم تراجعت، ثم استقرت.</p>
+      <p>لم يكن هناك خط مستقيم.</p>
+      <p>كانت الحياة نفسها تتحرك بطريقة لا يستطيع آدم تنظيمها.</p>
+      <p>وفي إحدى الليالي، خرج من المستشفى.</p>
+      <p>جلس في سيارته طويلًا قبل أن يشغلها.</p>
+      <p>كان يشعر بتعب لم يعرفه من قبل.</p>
+      <p>رن هاتفه.</p>
+      <p>كانت ليان.</p>
+      <p>نظر إلى اسمها.</p>
+      <p>ثم أجاب.</p>
+      <p>«مرحبًا.»</p>
+      <p>«كيف حالك؟»</p>
+      <p>«لا أعرف.»</p>
+      <p>سكتت قليلًا.</p>
+      <p>«هل والدك أفضل؟»</p>
+      <p>«قليلًا.»</p>
+      <p>«هذا جيد.»</p>
+      <p>«لا أعرف إن كان جيدًا.»</p>
+      <p>«ماذا تقصد؟»</p>
+      <p>قال:</p>
+      <p>«كلما تحسن قليلًا، أخاف أن أفرح. لأنني أخاف أن يتغير كل شيء مرة أخرى.»</p>
+      <p>لم تقل شيئًا.</p>
+      <p>ثم قالت:</p>
+      <p>«ربما لا تحتاج الآن إلى أن تعرف ماذا سيحدث.»</p>
+      <p>«لكنني أريد أن أعرف.»</p>
+      <p>«أعرف.»</p>
+      <p>«أريد أن أفعل شيئًا.»</p>
+      <p>«وأحيانًا لا يكون هناك شيء تفعله.»</p>
+      <p>«هذا أسوأ شيء.»</p>
+      <p>قالت:</p>
+      <p>«ليس دائمًا.»</p>
+      <p>«كيف؟»</p>
+      <p>«أحيانًا يكون قبول أنك لا تستطيع تغيير شيء هو أول قرار حقيقي تتخذه.»</p>
+      <p>سكت آدم.</p>
+      <p>قال:</p>
+      <p>«هل هذا يعني الاستسلام؟»</p>
+      <p>«لا.»</p>
+      <p>«ما الفرق؟»</p>
+      <p>قالت:</p>
+      <p>«الاستسلام أن تتوقف عن الفعل لأنك تعتقد أن لا شيء له معنى. أما القبول فهو أن تعرف حدود قدرتك ثم تستخدم ما بقي منها.»</p>
+      <p>كان آدم ينظر إلى الطريق أمامه.</p>
+      <p>أضواء السيارات تمر.</p>
+      <p>كل شخص داخل سيارة يذهب إلى مكان لا يعرفه هو.</p>
+      <p>قال:</p>
+      <p>«أشعر أن الحياة أكبر مني.»</p>
+      <p>قالت:</p>
+      <p>«هي كذلك.»</p>
+      <p>ضحك لأول مرة منذ أيام.</p>
+      <p>«هذه ليست إجابة مريحة.»</p>
+      <p>«لم أقل إنها مريحة.»</p>
+      <p>ثم أضافت:</p>
+      <p>«لكنها حقيقية.»</p>
+      <p>بقي صامتًا.</p>
+      <p>ثم قال:</p>
+      <p>«هل تخافين؟»</p>
+      <p>«نعم.»</p>
+      <p>«من ماذا؟»</p>
+      <p>«من أشياء كثيرة.»</p>
+      <p>«ولا تتحدثين عنها؟»</p>
+      <p>«ليس دائمًا.»</p>
+      <p>«لماذا؟»</p>
+      <p>قالت:</p>
+      <p>«لأنني تعلمت أن الشجاعة لا تعني أن أقول للناس إنني لا أخاف. تعني أن أتحرك رغم خوفي.»</p>
+      <p>أغمض آدم عينيه لحظة.</p>
+      <p>ثم قال:</p>
+      <p>«أعتقد أنني بدأت أفهم.»</p>
+      <p>«ماذا؟»</p>
+      <p>«أن الاختيار ليس دائمًا أن تختار النتيجة.»</p>
+      <p>«بل؟»</p>
+      <p>«أن تختار ما ستفعله حين لا تستطيع اختيار النتيجة.»</p>
+      <p>سكتت ليان.</p>
+      <p>ثم قالت:</p>
+      <p>«الآن بدأت تفهم.»</p>
+      <p>وأغلق آدم الهاتف.</p>
+      <p>لكنه لم يغلق السؤال.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 20 -->
+  <section class="section" id="ch-20">
+    <span class="section-number">§ 20</span>
+    <h2 class="section-title">النصيب</h2>
+    <div class="content">
+      <p>كان آدم يسمع كلمة «النصيب» كثيرًا.</p>
+      <p>في المستشفى.</p>
+      <p>في البيت.</p>
+      <p>وفي الأحاديث التي تدور بين الناس حين يعجزون عن تفسير ما حدث.</p>
+      <p>«هذا نصيبه.»</p>
+      <p>«كان مقدرًا له.»</p>
+      <p>«ليس لنا إلا أن نقبل.»</p>
+      <p>لم يكن آدم يرفض هذه الكلمات.</p>
+      <p>لكنه بدأ يخاف من استخدامها بطريقة سهلة.</p>
+      <p>فالإنسان قد يحول كلمة واحدة إلى باب يغلق به كل الأسئلة.</p>
+      <p>في أحد الأيام، جلس مع أخيه في المنزل.</p>
+      <p>قال أخوه:</p>
+      <p>«علينا أن نرضى بما حدث.»</p>
+      <p>قال آدم:</p>
+      <p>«نعم.»</p>
+      <p>ثم أضاف:</p>
+      <p>«لكن الرضا لا يعني أن نتوقف عن فعل ما نستطيع.»</p>
+      <p>نظر إليه أخوه.</p>
+      <p>«أعرف.»</p>
+      <p>«أحيانًا أشعر أن الناس يستخدمون النصيب كي لا يشعروا بالمسؤولية.»</p>
+      <p>قال أخوه:</p>
+      <p>«وماذا تقصد؟»</p>
+      <p>«أن يقول الإنسان: هذا نصيبي، ثم لا يسأل نفسه ماذا فعل هو.»</p>
+      <p>فكر أخوه.</p>
+      <p>ثم قال:</p>
+      <p>«لكن ليس كل شيء فعلناه.»</p>
+      <p>«صحيح.»</p>
+      <p>«إذن؟»</p>
+      <p>قال آدم:</p>
+      <p>«ربما علينا أن نفصل بين السؤالين.»</p>
+      <p>«أي سؤالين؟»</p>
+      <p>«ماذا حدث لنا؟ وماذا فعلنا بما حدث؟»</p>
+      <p>سكت أخوه.</p>
+      <p>كانت الجملة بسيطة.</p>
+      <p>لكنها بدت لآدم كأنها مفتاح لأشياء كثيرة عاشها دون أن يفهمها.</p>
+      <p>لم يختر أن يولد في المكان الذي ولد فيه.</p>
+      <p>ولم يختر والده.</p>
+      <p>ولم يختر مرضه.</p>
+      <p>ولم يختر كل ما سيحدث له لاحقًا.</p>
+      <p>لكن هذا كله لا يعني أنه لم يختر شيئًا.</p>
+      <p>كان هناك دائمًا شيء صغير، لحظة صغيرة، قرار صغير، كلمة يمكن قولها أو السكوت عنها.</p>
+      <p>وربما كانت حياة الإنسان كلها تتجمع في هذه الأشياء الصغيرة.</p>
+      <p>أدرك آدم أن القدر والاختيار ليسَا طريقين متوازيين دائمًا.</p>
+      <p>أحيانًا يلتقيان في اللحظة نفسها.</p>
+      <p>يأتي الحدث دون أن يستأذن.</p>
+      <p>ثم يأتي دور الإنسان.</p>
+      <p>وهناك، في تلك المسافة القصيرة بين الحدث والرد، يولد شيء اسمه الاختيار.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 21 -->
+  <section class="section" id="ch-21">
+    <span class="section-number">§ 21</span>
+    <h2 class="section-title">ما حدث لي</h2>
+    <div class="content">
+      <p>بعد أسابيع، استقرت حالة والده.</p>
+      <p>لم تعد الخطر الذي كان عليه في البداية، لكنها لم تعد الحياة التي عرفها آدم قبل ذلك أيضًا.</p>
+      <p>كان عليه أن يتعامل مع حقيقة جديدة.</p>
+      <p>والده يحتاج إلى رعاية.</p>
+      <p>والبيت تغير.</p>
+      <p>والعائلة تغيرت.</p>
+      <p>وهو تغير دون أن يقرر ذلك.</p>
+      <p>ذات مساء، جلس آدم في غرفة والده.</p>
+      <p>كان الأب نائمًا.</p>
+      <p>نظر إليه طويلًا.</p>
+      <p>ثم تذكر كل الأشياء التي لم يقلها.</p>
+      <p>أشياء كان يظن أن الوقت سيمنحه فرصة لقولها.</p>
+      <p>ثم فهم أن الوقت لا يوقّع معنا عقدًا.</p>
+      <p>إنه يمنحنا أيامًا فقط.</p>
+      <p>أما ضمان الغد، فليس من حقنا.</p>
+      <p>فتح هاتفه.</p>
+      <p>وجد رسالة من ليان.</p>
+      <p>«كيف حاله اليوم؟»</p>
+      <p>كتب:</p>
+      <p>«أفضل.»</p>
+      <p>ثم توقف.</p>
+      <p>أضاف:</p>
+      <p>«لكنني لست كما كنت.»</p>
+      <p>جاء الرد:</p>
+      <p>«ربما لأنك رأيت شيئًا لم تكن تريد أن تراه.»</p>
+      <p>سألها:</p>
+      <p>«ماذا؟»</p>
+      <p>«أننا لسنا أصحاب الوقت.»</p>
+      <p>قرأ الرسالة.</p>
+      <p>ثم وضع الهاتف جانبًا.</p>
+      <p>لم يكن يعرف لماذا شعر أن الحياة تسحب منه شيئًا قديمًا لتضع مكانه شيئًا لا يعرف اسمه.</p>
+      <p>ربما كان ذلك هو النضج.</p>
+      <p>أن تفقد بعض أوهامك دون أن تفقد قدرتك على الاستمرار.</p>
+      <p>اقترب من والده.</p>
+      <p>جلس إلى جواره.</p>
+      <p>ثم قال بصوت منخفض:</p>
+      <p>«أبي...»</p>
+      <p>لم يستيقظ.</p>
+      <p>تابع:</p>
+      <p>«هناك أشياء كثيرة كنت أريد أن أقولها لك.»</p>
+      <p>سكت.</p>
+      <p>ثم قال:</p>
+      <p>«لكنني سأبدأ الآن.»</p>
+      <p>لم يكن يعرف إن كان والده يسمعه.</p>
+      <p>لكنه للمرة الأولى لم ينتظر اللحظة المثالية.</p>
+      <p>فهم أن بعض القرارات لا تحتاج إلى ضمان النتيجة.</p>
+      <p>تحتاج فقط إلى أن تُتخذ قبل فوات الوقت.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 22 -->
+  <section class="section" id="ch-22">
+    <span class="section-number">§ 22</span>
+    <h2 class="section-title">ما فعلته بما حدث لي</h2>
+    <div class="content">
+      <p>بعد تلك الليلة، لم يعد آدم يفكر في القدر بالطريقة نفسها.</p>
+      <p>كان يظن أن السؤال هو:</p>
+      <p>«هل كان ما حدث مكتوبًا؟»</p>
+      <p>ثم اكتشف أن السؤال الأهم:</p>
+      <p>«ماذا سأفعل بعد أن حدث؟»</p>
+      <p>لم يكن يعرف إن كان قادرًا على تغيير المستقبل.</p>
+      <p>ولم يكن يعرف إن كان يستطيع تفسير الماضي.</p>
+      <p>لكنه بدأ يفهم شيئًا واحدًا:</p>
+      <p>الإنسان لا يعيش فقط ما يحدث له.</p>
+      <p>إنه يعيش أيضًا الطريقة التي يستجيب بها لما يحدث.</p>
+      <p>قد يتلقى شخصان الجرح نفسه، لكن أحدهما يحوله إلى قسوة، والآخر يحوله إلى فهم.</p>
+      <p>قد يخسر شخصان الشيء نفسه، فيقرر أحدهما أن يغلق قلبه، ويقرر الآخر أن يعرف قيمة ما بقي لديه.</p>
+      <p>الحدث واحد.</p>
+      <p>لكن الإنسان ليس واحدًا.</p>
+      <p>وفي إحدى الأمسيات، قالت ليان لآدم:</p>
+      <p>«أنت تغيرت.»</p>
+      <p>قال:</p>
+      <p>«نعم.»</p>
+      <p>«هل أنت سعيد بهذا التغيير؟»</p>
+      <p>فكر طويلًا.</p>
+      <p>ثم قال:</p>
+      <p>«لا أعرف إن كنت سعيدًا. لكنني أعرف أنني لم أعد أستطيع العودة إلى الرجل الذي كنت عليه.»</p>
+      <p>قالت:</p>
+      <p>«وهل هذا سيئ؟»</p>
+      <p>«ليس بالضرورة.»</p>
+      <p>«إذن؟»</p>
+      <p>قال:</p>
+      <p>«بعض الأشياء لا نختارها، لكنها تختار لنا نسخة جديدة من أنفسنا.»</p>
+      <p>قالت ليان:</p>
+      <p>«ليس تمامًا.»</p>
+      <p>نظر إليها.</p>
+      <p>«ماذا تقصدين؟»</p>
+      <p>قالت:</p>
+      <p>«الحدث قد يدفعك نحو نسخة جديدة، لكنك أنت من يقرر أي نسخة ستكون.»</p>
+      <p>سكت آدم.</p>
+      <p>ثم قال:</p>
+      <p>«ربما لم أختر ما حدث لي.»</p>
+      <p>«لكن؟»</p>
+      <p>نظر إليها.</p>
+      <p>وقال:</p>
+      <p>«لكنني ما زلت مسؤولًا عمّا فعلته بما حدث لي.»</p>
+      <p>ابتسمت ليان.</p>
+      <p>لم تقل شيئًا.</p>
+      <p>لكن آدم شعر أن الجملة لم تعد مجرد فكرة.</p>
+      <p>لقد أصبحت جزءًا منه.</p>
+      <p>وكان لا يزال يجهل أن أصعب اختبار لها لم يأتِ بعد.</p>
+      <p>فالقدر لم يكن قد انتهى من طرق بابه.</p>
+    </div>
+  </section>
+
+  <!-- PART 4 -->
+  <div class="part-header" id="part-4">
+    <span class="part-label">الجزء الرابع</span>
+    <h1>الموجة</h1>
+  </div>
+
+  <section class="section" id="ch-23">
+    <div class="content">
+      <p>لم يكن آدم قد ولد رجلًا يحب القواعد.</p>
+      <p>هذه الفكرة لم تخطر له من قبل.</p>
+      <p>كان يظن أن الأشياء التي تسكن في الإنسان منذ زمن طويل هي جزء من طبيعته، وأن ما اعتاده المرء حتى صار يفعله دون تفكير لا يحتاج إلى سؤال.</p>
+      <p>لكن سؤالًا واحدًا بدأ يلاحقه:</p>
+      <p><strong>من أين جئت بكل هذا؟</strong></p>
+      <p>لم يكن يقصد البيت فقط، ولا أباه وحده، ولا المدرسة، ولا الشوارع التي مشى فيها طفلًا.</p>
+      <p>كان يقصد ذلك الخليط الغامض من الأصوات والوجوه والخسارات والنجاحات والخوف والتوقعات، الذي يتجمع داخل الإنسان حتى يظن أنه هو.</p>
+      <p>جلس آدم في غرفة أبيه القديمة.</p>
+      <p>لم يتغير شيء كثيرًا.</p>
+      <p>الساعة على الجدار ما زالت متوقفة عند وقت لا يتذكره.</p>
+      <p>الكتب مصطفة كما كانت.</p>
+      <p>والكرسي الخشبي الذي كان أبوه يجلس عليه في المساء بقي في مكانه.</p>
+      <p>مد آدم يده إلى ظهر الكرسي، ثم سحبها.</p>
+      <p>تذكر فجأة جملة قديمة:</p>
+      <p>«الرجل يعرف حدوده.»</p>
+      <p>كان أبوه يقولها كثيرًا.</p>
+      <p>لم يكن يقصد بها الشر.</p>
+      <p>بل كان يعتقد أنه يحمي ابنه من الفوضى.</p>
+      <p>وفي طفولته، لم يكن آدم يعرف الفرق بين الحماية والسيطرة.</p>
+      <p>كان يسمع النصيحة، ويحفظها، ثم يحملها معه.</p>
+      <p>كبرت الجملة معه.</p>
+      <p>كبر معها.</p>
+      <p>لكن شيئًا آخر كبر أيضًا.</p>
+      <p>الخوف من أن يتجاوز الحد.</p>
+      <p>والخوف من أن يسمح لغيره بتجاوزه.</p>
+      <p>والخوف الأكبر من أن يكتشف يومًا أن الحدود التي دافع عنها طوال حياته لم تكن كلها ضرورية.</p>
+      <p>رفع عينيه نحو صورة أبيه.</p>
+      <p>وقال بصوت منخفض:</p>
+      <p>«هل كنت تحميني، أم كنت تعلمني كيف أخاف؟»</p>
+      <p>ثم سكت.</p>
+      <p>لم يكن السؤال اتهامًا.</p>
+      <p>كان محاولة للفهم.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 24 -->
+  <section class="section" id="ch-24">
+    <span class="section-number">§ 24</span>
+    <h2 class="section-title">الماضي</h2>
+    <div class="content">
+      <p>في اليوم التالي، أخرج آدم صندوقًا قديمًا من الخزانة.</p>
+      <p>كان الصندوق مليئًا بأوراق المدرسة، وصور قديمة، ورسائل لم يعد يعرف لماذا احتفظ بها.</p>
+      <p>جلس على الأرض وبدأ يقلبها واحدة واحدة.</p>
+      <p>وجد صورة لطفل يقف إلى جانب أبيه.</p>
+      <p>كان الطفل آدم.</p>
+      <p>وجه صغير، ملابس مرتبة، ويدان متشابكتان أمامه.</p>
+      <p>ابتسم.</p>
+      <p>ثم لاحظ شيئًا لم ينتبه إليه من قبل.</p>
+      <p>كان أبوه يقف بجانبه واضعًا يده على كتفه.</p>
+      <p>لم يكن آدم ينظر إلى الكاميرا.</p>
+      <p>كان ينظر إلى أبيه.</p>
+      <p>قال لنفسه:</p>
+      <p>«كنت أبحث عن رأيه حتى وأنا أصوَّر.»</p>
+      <p>أعاد الصورة إلى الصندوق.</p>
+      <p>لكنه لم يستطع إغلاقه.</p>
+      <p>توالت الذكريات.</p>
+      <p>أول مرة أخطأ فيها أمام الناس.</p>
+      <p>أول مرة قيل له فيها إن الرجل لا ينبغي أن يتردد.</p>
+      <p>أول مرة خسر شيئًا ولم يسمح لنفسه بالبكاء.</p>
+      <p>أول مرة تعلّم أن الصمت أكثر أمانًا من الكلام.</p>
+      <p>لم يكن أحد قد قال له صراحة: كن هكذا.</p>
+      <p>لكن الحياة كانت تقولها بطرق كثيرة.</p>
+      <p>نظرة.</p>
+      <p>كلمة.</p>
+      <p>مقارنة.</p>
+      <p>عقوبة.</p>
+      <p>مديح.</p>
+      <p>ثم مع السنوات، تحولت الإشارات إلى عادات.</p>
+      <p>والعادات إلى شخصية.</p>
+      <p>والشخصية إلى شيء ظنه آدم قدرًا.</p>
+      <p>لكن هل كان قدرًا؟</p>
+      <p>أم كان تاريخًا؟</p>
+      <p>والتاريخ، مهما كان قويًا، هل يمنع الإنسان من أن يبدأ من جديد؟</p>
+      <p>أغلق الصندوق أخيرًا.</p>
+      <p>وقال:</p>
+      <p>«ربما لا أستطيع تغيير ما حدث لي وأنا طفل.»</p>
+      <p>ثم أضاف:</p>
+      <p>«لكنني أستطيع أن أتوقف عن جعله يحدث لي كل يوم.»</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 25 -->
+  <section class="section" id="ch-25">
+    <span class="section-number">§ 25</span>
+    <h2 class="section-title">الظروف</h2>
+    <div class="content">
+      <p>التقى آدم بليان بعد أيام.</p>
+      <p>كان اللقاء عابرًا في ظاهره.</p>
+      <p>جلسا في مقهى هادئ، ولم يتحدث أي منهما في البداية عن المرض أو الماضي.</p>
+      <p>قالت ليان:</p>
+      <p>«أنت مختلف منذ آخر مرة رأيتك.»</p>
+      <p>ابتسم آدم.</p>
+      <p>«هل هذا جيد أم سيئ؟»</p>
+      <p>قالت:</p>
+      <p>«لا أعرف. لكنك أقل استعجالًا في الحكم.»</p>
+      <p>صمت قليلًا.</p>
+      <p>ثم قال:</p>
+      <p>«بدأت أفكر في الأشياء التي صنعتني.»</p>
+      <p>«وماذا وجدت؟»</p>
+      <p>«وجدت أنني لست وحدي في نفسي.»</p>
+      <p>نظرت إليه باستغراب.</p>
+      <p>تابع:</p>
+      <p>«في داخلي أبي، ومدرستي، وخوفي القديم، والأشياء التي قيلت لي، والأشياء التي لم يقلها أحد.»</p>
+      <p>قالت ليان:</p>
+      <p>«كلنا نحمل شيئًا من ذلك.»</p>
+      <p>«لكن هل يعني هذا أننا لسنا مسؤولين عن أنفسنا؟»</p>
+      <p>هزت رأسها.</p>
+      <p>«لا. يعني فقط أن المسؤولية أصعب مما نظن.»</p>
+      <p>نظر إليها.</p>
+      <p>فقالت:</p>
+      <p>«من السهل أن تقول للإنسان: أنت اخترت هذا. ومن السهل أيضًا أن تقول له: الظروف أجبرتك. الأصعب أن تقول الأمرين معًا.»</p>
+      <p>«كيف؟»</p>
+      <p>«أن تعرف أن ظروفك أثرت فيك، من دون أن تجعلها عذرًا لكل شيء.»</p>
+      <p>سكت آدم.</p>
+      <p>كان الكلام يشبه شيئًا ظل يبحث عنه دون أن يعرف اسمه.</p>
+      <p>قال:</p>
+      <p>«إذن نحن لسنا أحرارًا تمامًا.»</p>
+      <p>أجابته:</p>
+      <p>«ولسنا مسلوبي الإرادة تمامًا.»</p>
+      <p>ثم نظرت من النافذة.</p>
+      <p>«ربما نحن نعيش دائمًا بين الاثنين.»</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 26 -->
+  <section class="section" id="ch-26">
+    <span class="section-number">§ 26</span>
+    <h2 class="section-title">الإنسان الذي صنعته الأيام</h2>
+    <div class="content">
+      <p>في تلك الليلة، لم ينم آدم مبكرًا.</p>
+      <p>جلس إلى مكتبه، وأمامَه ورقة بيضاء.</p>
+      <p>كتب:</p>
+      <p><strong>من أنا؟</strong></p>
+      <p>ثم توقف.</p>
+      <p>تحت السؤال كتب:</p>
+      <p>«أنا ابن أبي.»</p>
+      <p>ثم شطبها.</p>
+      <p>كتب:</p>
+      <p>«أنا نتيجة ما حدث لي.»</p>
+      <p>ثم شطبها أيضًا.</p>
+      <p>كتب:</p>
+      <p>«أنا اختياراتي.»</p>
+      <p>ظل ينظر إلى الجملة طويلًا.</p>
+      <p>ثم أضاف:</p>
+      <p>«لكن اختياراتي لم تولد من فراغ.»</p>
+      <p>بدأ يرى حياته بطريقة جديدة.</p>
+      <p>كان هناك آدم الذي تربى في بيت معين.</p>
+      <p>وآدم الذي تعلم أن الخطأ مكلف.</p>
+      <p>وآدم الذي اعتاد أن يختار الطريق الآمن.</p>
+      <p>وآدم الذي صار يرى النظام حماية.</p>
+      <p>وآدم الذي يخاف أن يتحول الاختلاف إلى فوضى.</p>
+      <p>كل هؤلاء لم يكونوا أشخاصًا مختلفين.</p>
+      <p>كانوا هو.</p>
+      <p>قال:</p>
+      <p>«إذن أنا لا أبدأ من الصفر.»</p>
+      <p>ثم ابتسم ابتسامة خفيفة.</p>
+      <p>«لكنني أيضًا لا أبدأ من لا شيء.»</p>
+      <p>كانت تلك الفكرة أكثر عدلًا من كل الإجابات السابقة.</p>
+      <p>فالإنسان لا يختار نقطة البداية.</p>
+      <p>لكنه يستطيع، أحيانًا، أن يختار الخطوة التالية.</p>
+      <p>وهنا أدرك آدم أن الماضي لا يختفي حين نفهمه.</p>
+      <p>لكنه يتوقف عن امتلاك المستقبل وحده.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 27 -->
+  <section class="section" id="ch-27">
+    <span class="section-number">§ 27</span>
+    <h2 class="section-title">الموجة</h2>
+    <div class="content">
+      <p>في صباح اليوم التالي، كانت ليان تنتظر آدم قرب النهر.</p>
+      <p>كان الماء يتحرك أمامهما باستمرار.</p>
+      <p>لا شيء فيه يبقى في المكان نفسه.</p>
+      <p>قالت:</p>
+      <p>«هل تعرف لماذا أحب النظر إلى الماء؟»</p>
+      <p>قال آدم:</p>
+      <p>«لأنك تحبين الهدوء؟»</p>
+      <p>ابتسمت.</p>
+      <p>«ربما. لكنني أحب شيئًا آخر.»</p>
+      <p>«ما هو؟»</p>
+      <p>«أنه لا يحتفظ بالشكل نفسه، ومع ذلك لا يتوقف عن كونه ماء.»</p>
+      <p>نظر آدم إلى النهر.</p>
+      <p>قال:</p>
+      <p>«تحدثتِ كأنك تعرفين إلى أين سيصل.»</p>
+      <p>«لا. أنا فقط أعرف أنه يتحرك.»</p>
+      <p>صمتا.</p>
+      <p>ثم قالت:</p>
+      <p>«أحيانًا أفكر في الإنسان بالطريقة نفسها.»</p>
+      <p>«كيف؟»</p>
+      <p>«يحمل أشياء كثيرة ليست من اختياره. عائلته، زمنه، لغته، ذاكرته، خوفه، خساراته، وحتى الأشياء التي لم تحدث له لكنها جعلته يخاف أن تحدث.»</p>
+      <p>نظر إليها.</p>
+      <p>تابعت:</p>
+      <p>«كل ذلك يتحرك معه.»</p>
+      <p>ثم قالت:</p>
+      <p>«كأنه موجة.»</p>
+      <p>لم يجب آدم.</p>
+      <p>كان يعرف أنها لا تتحدث عن الفيزياء.</p>
+      <p>كانت تتحدث عنه.</p>
+      <p>وعنها.</p>
+      <p>وعن كل إنسان يمشي في حياته وهو يحمل آثار ما سبقه.</p>
+      <p>قال:</p>
+      <p>«إذن الموجة هي كل ما جاء قبل لحظة الاختيار.»</p>
+      <p>فكرت قليلًا.</p>
+      <p>ثم قالت:</p>
+      <p>«ربما هي كل ما جاء معنا إلى لحظة الاختيار.»</p>
+      <p>أعجبته الدقة.</p>
+      <p>لأن الفرق بين العبارتين كان كبيرًا.</p>
+      <p>فالماضي لا يبقى خلف الإنسان دائمًا.</p>
+      <p>أحيانًا يسير داخله.</p>
+      <p>قال آدم:</p>
+      <p>«وهل يمكن للإنسان أن يخرج من موجته؟»</p>
+      <p>أجابته:</p>
+      <p>«لا أظن أنه يحتاج إلى الخروج منها.»</p>
+      <p>«إذن ماذا يفعل؟»</p>
+      <p>نظرت إليه وقالت:</p>
+      <p>«يتعلم أن يعرفها، حتى لا يظن أنها هي كل ما يملك.»</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 28 -->
+  <section class="section" id="ch-28">
+    <span class="section-number">§ 28</span>
+    <h2 class="section-title">السؤال الأصعب</h2>
+    <div class="content">
+      <p>في طريق العودة، بقي آدم صامتًا.</p>
+      <p>كانت كلمات ليان تتكرر في داخله.</p>
+      <p>«حتى لا يظن أنها هي كل ما يملك.»</p>
+      <p>فكر في أبيه.</p>
+      <p>في طفولته.</p>
+      <p>في القواعد.</p>
+      <p>في المقعد الأول.</p>
+      <p>في كل مرة ظن فيها أنه يختار، بينما كان في الحقيقة يكرر ما تعلمه.</p>
+      <p>ثم جاءه السؤال الأصعب:</p>
+      <p><strong>كم من قراراتي كان اختياري فعلًا؟</strong></p>
+      <p>لم يجد جوابًا.</p>
+      <p>لكنه لم يعد يخاف من عدم وجود الجواب.</p>
+      <p>ربما كان السؤال أهم من الجواب.</p>
+      <p>عندما وصل إلى بيته، فتح دفتره القديم.</p>
+      <p>كتب:</p>
+      <p>«أنا موجة، لأنني أحمل ما سبقني.»</p>
+      <p>ثم توقف.</p>
+      <p>وأكمل:</p>
+      <p>«لكنني لست الموجة وحدها.»</p>
+      <p>ظل القلم بين أصابعه.</p>
+      <p>ثم كتب جملة ثالثة:</p>
+      <p>«هناك لحظة لا يكون فيها السؤال: ماذا صنع بي الماضي؟ بل: ماذا سأفعل الآن بما صنعه الماضي بي؟»</p>
+      <p>أغلق الدفتر.</p>
+      <p>وفي تلك اللحظة، فهم أن الجزء الأصعب لم يبدأ بعد.</p>
+      <p>فمعرفة الموجة لا تكفي.</p>
+      <p>سيأتي وقت يجب فيه على الإنسان أن يظهر كما هو في لحظة واحدة.</p>
+      <p>لحظة لا تحميه فيها القواعد.</p>
+      <p>ولا تنقذه الصورة.</p>
+      <p>ولا يستطيع أن يلقي كل شيء على القدر.</p>
+      <p>لحظة يصبح فيها السؤال:</p>
+      <p><strong>ماذا ستختار؟</strong></p>
+    </div>
+  </section>
+
+  <!-- PART 5 -->
+  <div class="part-header" id="part-5">
+    <span class="part-label">الجزء الخامس</span>
+    <h1>الجسيم</h1>
+  </div>
+
+  <section class="section" id="ch-29">
+    <div class="content">
+      <p>لم يكن آدم يعرف أن الإنسان قد يفهم نفسه سنوات طويلة، ثم تأتي لحظة واحدة تختبر كل ما فهمه.</p>
+      <p>كان يظن أن المعرفة تمنح الإنسان حصانة.</p>
+      <p>لكن الأيام أثبتت له العكس.</p>
+      <p>المعرفة لا تمنع الخوف.</p>
+      <p>ولا تمنع التردد.</p>
+      <p>ولا تجعل القرار أسهل دائمًا.</p>
+      <p>أحيانًا تجعل القرار أكثر صعوبة.</p>
+      <p>لأنك بعد أن تعرف، لا تستطيع أن تتظاهر بأنك لم تعرف.</p>
+      <p>عاد وضع أبيه إلى التدهور.</p>
+      <p>لم يكن الأمر مفاجئًا تمامًا، لكنه جاء في وقت لم يكن آدم مستعدًا له.</p>
+      <p>كانت هناك إجراءات يجب اتخاذها.</p>
+      <p>وكان هناك خلاف بين أفراد الأسرة.</p>
+      <p>كل شخص يرى الأمر من زاوية مختلفة.</p>
+      <p>أحدهم يريد التمسك بما اعتادوا عليه.</p>
+      <p>آخر يريد اتخاذ قرار سريع.</p>
+      <p>وثالث يخاف أن يتحمل مسؤولية القرار.</p>
+      <p>أما آدم، فوجد نفسه في المنتصف.</p>
+      <p>للمرة الأولى، لم يكن يستطيع أن يكتفي بقول:</p>
+      <p>«هذه هي القاعدة.»</p>
+      <p>فالقاعدة لم تكن تعطي جوابًا.</p>
+      <p>ولم يكن يستطيع أن يقول:</p>
+      <p>«هذا قدرنا.»</p>
+      <p>لأن القدر لم يكن يطلب منه أن يتوقف.</p>
+      <p>كان عليه أن يفعل شيئًا.</p>
+      <p>لكن ماذا؟</p>
+      <p>خرج من الغرفة.</p>
+      <p>جلس وحده في الممر.</p>
+      <p>أخرج هاتفه.</p>
+      <p>ظل اسم ليان أمامه طويلًا.</p>
+      <p>ثم اتصل.</p>
+      <p>أجابت بعد لحظات.</p>
+      <p>«آدم؟»</p>
+      <p>قال:</p>
+      <p>«أحتاج أن أتحدث معك.»</p>
+      <p>قالت:</p>
+      <p>«أنا أسمعك.»</p>
+      <p>ولأول مرة، لم يبحث آدم عن الكلمات الصحيحة.</p>
+      <p>قال فقط:</p>
+      <p>«أنا خائف.»</p>
+      <p>ساد الصمت.</p>
+      <p>ثم قالت:</p>
+      <p>«إذن أنت في المكان الذي يبدأ فيه الاختيار الحقيقي.»</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 30 -->
+  <section class="section" id="ch-30">
+    <span class="section-number">§ 30</span>
+    <h2 class="section-title">لحظة القرار</h2>
+    <div class="content">
+      <p>قال آدم:</p>
+      <p>«ماذا تقصدين؟»</p>
+      <p>أجابته ليان:</p>
+      <p>«حين لا تكون خائفًا، قد تختار بسهولة لأنك لا ترى الثمن.»</p>
+      <p>«وحين أخاف؟»</p>
+      <p>«حينها تعرف أن للقرار ثمنًا.»</p>
+      <p>صمت آدم.</p>
+      <p>قال:</p>
+      <p>«لكن ماذا لو اخترت خطأ؟»</p>
+      <p>قالت:</p>
+      <p>«ستعرف أنك اخترت.»</p>
+      <p>«هذا لا يطمئنني.»</p>
+      <p>«لم أقل إن الحرية مريحة.»</p>
+      <p>ابتسم رغم خوفه.</p>
+      <p>كان يعرف الآن أن ليان لا تعطيه جوابًا جاهزًا.</p>
+      <p>هي فقط ترفض أن تأخذ القرار منه.</p>
+      <p>قال:</p>
+      <p>«كنت أعتقد أن الحرية هي أن أعرف الطريق الصحيح.»</p>
+      <p>«وربما هي أن تعرف أنك مسؤول عن الطريق الذي ستسلكه حتى عندما لا يكون الصحيح واضحًا.»</p>
+      <p>نظر آدم إلى باب غرفة أبيه.</p>
+      <p>كان الباب مغلقًا.</p>
+      <p>خلفه رجل علّمه طوال حياته كيف يكون قويًا.</p>
+      <p>والآن، للمرة الأولى، كان آدم هو الذي يجب أن يكون قويًا.</p>
+      <p>لكن القوة هذه المرة لم تكن في الصمت.</p>
+      <p>ولا في السيطرة.</p>
+      <p>ولا في إصدار الأوامر.</p>
+      <p>كانت في أن يقول:</p>
+      <p>«سأتخذ القرار، وسأتحمل نتيجته.»</p>
+      <p>أغلق الهاتف.</p>
+      <p>وقف.</p>
+      <p>فتح الباب.</p>
+      <p>ولم يكن يعرف إن كان قراره هو الأفضل.</p>
+      <p>لكنه عرف شيئًا واحدًا:</p>
+      <p>أنه لن يختبئ هذه المرة خلف شيء آخر.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 31 -->
+  <section class="section" id="ch-31">
+    <span class="section-number">§ 31</span>
+    <h2 class="section-title">ثمن الاختيار</h2>
+    <div class="content">
+      <p>لم يوافق الجميع على قرار آدم.</p>
+      <p>وهذا كان متوقعًا.</p>
+      <p>لكن ما لم يكن متوقعًا هو شعوره بعد اتخاذه.</p>
+      <p>لم يشعر بالانتصار.</p>
+      <p>لم يشعر بأنه أصبح أكثر حرية.</p>
+      <p>شعر بثقل.</p>
+      <p>كان القرار ملكه الآن.</p>
+      <p>ولهذا كان ثمنه ملكه أيضًا.</p>
+      <p>قال له أحد أفراد الأسرة:</p>
+      <p>«لو حدث شيء، ستتحمل المسؤولية.»</p>
+      <p>نظر آدم إليه وقال:</p>
+      <p>«أعرف.»</p>
+      <p>كانت الكلمة قصيرة.</p>
+      <p>لكنها لم تكن سهلة.</p>
+      <p>في الماضي، كان يبحث عن شخص يشاركه المسؤولية حتى لا يكون وحده.</p>
+      <p>أما الآن، فقد فهم أن بعض القرارات لا يمكن توزيعها بالتساوي.</p>
+      <p>يمكن للآخرين أن ينصحوا.</p>
+      <p>يمكنهم أن يعترضوا.</p>
+      <p>يمكنهم أن يساندوا.</p>
+      <p>لكن هناك لحظة يبقى فيها الإنسان وحده أمام نفسه.</p>
+      <p>خرج من المستشفى في المساء.</p>
+      <p>كانت السماء ملبدة بالغيوم.</p>
+      <p>اتصلت به ليان.</p>
+      <p>قالت:</p>
+      <p>«كيف أنت؟»</p>
+      <p>أجاب:</p>
+      <p>«لا أعرف.»</p>
+      <p>«هل ندمت؟»</p>
+      <p>توقف.</p>
+      <p>ثم قال:</p>
+      <p>«لا أعرف أيضًا.»</p>
+      <p>ضحكت بهدوء.</p>
+      <p>«إذن أنت صادق.»</p>
+      <p>قال:</p>
+      <p>«كنت أعتقد أن القرار الصحيح يمنحك راحة.»</p>
+      <p>قالت:</p>
+      <p>«أحيانًا القرار الصحيح يمنحك فقط القدرة على أن تنام وأنت تعرف أنك لم تخن ما تؤمن به.»</p>
+      <p>رفع آدم رأسه نحو السماء.</p>
+      <p>لم يكن مرتاحًا.</p>
+      <p>لكنه كان للمرة الأولى صادقًا مع نفسه.</p>
+      <p>وفهم أن الحرية ليست غياب الثمن.</p>
+      <p>بل قبول أن بعض الأثمان لا يمكن أن يدفعها أحد بدلًا منك.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 32 -->
+  <section class="section" id="ch-32">
+    <span class="section-number">§ 32</span>
+    <h2 class="section-title">ما بين الخوف والحرية</h2>
+    <div class="content">
+      <p>بعد أيام، التقى آدم بليان في المكان الذي جمعهما للمرة الأولى.</p>
+      <p>القاعات نفسها.</p>
+      <p>الأبواب نفسها.</p>
+      <p>وحتى المقاعد بدت وكأنها لم تتغير.</p>
+      <p>قالت ليان:</p>
+      <p>«غريب أن نعود إلى هنا.»</p>
+      <p>قال آدم:</p>
+      <p>«لم يعد المكان كما كان.»</p>
+      <p>ابتسمت:</p>
+      <p>«أم أننا نحن الذين لم نعد كما كنا؟»</p>
+      <p>جلسا.</p>
+      <p>لكن آدم لم يجلس في المقعد الذي اعتاد الجلوس فيه.</p>
+      <p>لاحظت ليان ذلك.</p>
+      <p>قالت:</p>
+      <p>«لماذا اخترت هذا المقعد؟»</p>
+      <p>نظر إليه.</p>
+      <p>ثم قال:</p>
+      <p>«لأنني أردت أن أعرف إن كنت أختاره أنا.»</p>
+      <p>ضحكت.</p>
+      <p>«وهل عرفت؟»</p>
+      <p>«لا.»</p>
+      <p>«لماذا؟»</p>
+      <p>«لأنني اكتشفت أن الاختيار ليس لحظة واحدة دائمًا. أحيانًا نحتاج أن نعرف لماذا اخترنا قبل أن نعرف ماذا اخترنا.»</p>
+      <p>قالت:</p>
+      <p>«وهل ما زلت تحب القواعد؟»</p>
+      <p>فكر.</p>
+      <p>ثم قال:</p>
+      <p>«نعم.»</p>
+      <p>ضحكت.</p>
+      <p>«إذن لم تتغير كثيرًا.»</p>
+      <p>قال:</p>
+      <p>«تغيرت في شيء واحد.»</p>
+      <p>«ما هو؟»</p>
+      <p>«لم أعد أعتقد أن القاعدة تمنحني الحق في أن أقرر عن الآخرين.»</p>
+      <p>سكتت ليان.</p>
+      <p>ثم قالت:</p>
+      <p>«الآن فهمت الفرق بين النظام والسيطرة.»</p>
+      <p>قال:</p>
+      <p>«وفهمت أن احترام الإنسان لا يعني أن أطيعه، ولا أن أجعله يطيعني.»</p>
+      <p>نظر كل منهما إلى الآخر.</p>
+      <p>وللمرة الأولى، لم يكن بينهما شيء يحتاج إلى تفسير.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 33 -->
+  <section class="section" id="ch-33">
+    <span class="section-number">§ 33</span>
+    <h2 class="section-title">الجسيم</h2>
+    <div class="content">
+      <p>في طريق عودته، تذكر آدم النهر.</p>
+      <p>تذكر حديث ليان عن الموجة.</p>
+      <p>وفكر في شيء آخر.</p>
+      <p>الموجة لا تتوقف.</p>
+      <p>الماضي لا يتوقف عن التأثير.</p>
+      <p>الظروف لا تختفي.</p>
+      <p>الذاكرة لا تمحو نفسها.</p>
+      <p>لكن هناك لحظة صغيرة جدًا، لا تكاد تُرى، تقع بين كل ما حمله الإنسان وبين ما سيفعله بعد ذلك.</p>
+      <p>لحظة يقف فيها الإنسان.</p>
+      <p>ليس بوصفه ابنًا فقط.</p>
+      <p>ولا زوجًا.</p>
+      <p>ولا رجلًا أو امرأة.</p>
+      <p>ولا ابن بيئته.</p>
+      <p>ولا ضحية ماضيه.</p>
+      <p>بل بوصفه إنسانًا أمام قرار.</p>
+      <p>قال آدم لنفسه:</p>
+      <p>«ربما هذا هو الجسيم.»</p>
+      <p>لم يقصد بذلك حقيقة علمية.</p>
+      <p>كان يقصد صورة الإنسان في اللحظة التي يصبح فيها اختياره موقفًا.</p>
+      <p>الموجة هي الإنسان الذي حملته الظروف.</p>
+      <p>والجسيم هو الإنسان الذي اتخذ موقفًا داخل الظروف.</p>
+      <p>لم يكن آدم قادرًا على اختيار كل ما سبقه.</p>
+      <p>لكنه كان قادرًا، ولو في بعض اللحظات، على أن يقول:</p>
+      <p>«لن أترك ما حدث لي يقرر وحده من سأكون.»</p>
+      <p>توقف في الطريق.</p>
+      <p>نظر إلى يديه.</p>
+      <p>كانت يداه هما نفسهما.</p>
+      <p>لكن الرجل الذي ينظر إليهما لم يعد هو نفسه تمامًا.</p>
+      <p>لم يصبح حرًا من كل شيء.</p>
+      <p>بل أصبح أكثر وعيًا بما لا يستطيع تغييره، وبما يستطيع أن يتحمل مسؤوليته.</p>
+      <p>وهذا، بالنسبة إليه، كان شكلًا أكثر صدقًا من الحرية.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 34 -->
+  <section class="section" id="ch-34">
+    <span class="section-number">§ 34</span>
+    <h2 class="section-title">الطريق الذي اختاره</h2>
+    <div class="content">
+      <p>مرت أشهر.</p>
+      <p>تغيرت أشياء كثيرة.</p>
+      <p>وبقيت أشياء أخرى كما هي.</p>
+      <p>أبوه لم يعد كما كان.</p>
+      <p>وآدم لم يعد كما كان.</p>
+      <p>أما ليان، فلم يحاول أن يضعها في صورة جديدة.</p>
+      <p>تعلم أن الإنسان ليس صورة ثابتة يمكن الاحتفاظ بها.</p>
+      <p>كانت بينهما مسافة.</p>
+      <p>ثم قرب.</p>
+      <p>ثم مسافة أخرى.</p>
+      <p>ولم يكن أي منهما يحاول أن يمتلك الآخر.</p>
+      <p>كانا يتعلمان شيئًا أصعب من الحب السهل:</p>
+      <p>أن يتركا للآخر حقه في أن يكون نفسه.</p>
+      <p>في إحدى الأمسيات، قال آدم:</p>
+      <p>«هل تعتقدين أننا اخترنا كل هذا؟»</p>
+      <p>قالت ليان:</p>
+      <p>«لا.»</p>
+      <p>«إذن ماذا اخترنا؟»</p>
+      <p>فكرت طويلًا.</p>
+      <p>ثم قالت:</p>
+      <p>«اخترنا ماذا نفعل بما لم نختره.»</p>
+      <p>ابتسم.</p>
+      <p>كان يعرف أن الجملة لا تحل الحياة.</p>
+      <p>ولا تمنح الإنسان سيطرة على المستقبل.</p>
+      <p>لكنها تمنحه شيئًا آخر.</p>
+      <p>مساحة صغيرة بين الحدث والاستجابة.</p>
+      <p>مساحة يستطيع فيها أن يسأل نفسه:</p>
+      <p>«من أريد أن أكون الآن؟»</p>
+      <p>ومع كل مرة يسأل فيها هذا السؤال بصدق، كان يشعر أن الطريق يصبح أقل غموضًا.</p>
+      <p>لم يكن الطريق الذي اختاره خاليًا من الخوف.</p>
+      <p>ولم يكن مضمون النهاية.</p>
+      <p>لكنه كان طريقًا يستطيع أن ينسبه إلى نفسه.</p>
+      <p>وهذا كان كافيًا.</p>
+    </div>
+  </section>
+
+  <!-- ENDING -->
+  <div class="part-header" id="ending">
+    <span class="part-label">الخاتمة</span>
+    <h1>ما بعد الطريق</h1>
+  </div>
+
+  <section class="section" id="ch-35">
+    <span class="section-number">§ 35</span>
+    <h2 class="section-title">العودة</h2>
+    <div class="content">
+      <p>مرت سنوات.</p>
+      <p>لم يشعر آدم كيف مرت.</p>
+      <p>فالسنوات لا تعلن عن رحيلها.</p>
+      <p>تأخذ شيئًا صغيرًا كل يوم، ثم تترك للإنسان في النهاية شعورًا بأن الزمن عبره دون أن يستأذنه.</p>
+      <p>عاد آدم إلى المدينة التي بدأت فيها الحكاية.</p>
+      <p>كان هناك مؤتمر جديد في القاعة نفسها.</p>
+      <p>الدعوة كانت رسمية.</p>
+      <p>والبرنامج مرتبًا.</p>
+      <p>والأسماء موضوعة على المقاعد.</p>
+      <p>دخل القاعة قبل بدء المناسبة بقليل.</p>
+      <p>توقف عند الباب.</p>
+      <p>نظر حوله.</p>
+      <p>لم يتغير المكان كثيرًا.</p>
+      <p>الممر نفسه.</p>
+      <p>النوافذ نفسها.</p>
+      <p>حتى المقاعد بدت وكأنها تنتظر الأشخاص الذين غادروا منذ سنوات.</p>
+      <p>ابتسم آدم.</p>
+      <p>تذكر أول مرة دخل فيها هذه القاعة.</p>
+      <p>وتذكر الجملة التي قالها لليان:</p>
+      <p>«هذا المقعد ليس لك.»</p>
+      <p>كان يومها يظن أنه يدافع عن النظام.</p>
+      <p>أما الآن، فقد عرف أن الإنسان قد يدافع عن القاعدة وهو في الحقيقة يدافع عن خوفه من الفوضى.</p>
+      <p>مشى بين الصفوف.</p>
+      <p>ثم توقف.</p>
+      <p>وجد المقعد القديم.</p>
+      <p>لم يعد عليه اسم أحد.</p>
+      <p>جلس آدم أمامه دون أن يلمسه.</p>
+      <p>ثم نظر إلى المقعد الآخر.</p>
+      <p>المقعد الذي جلست فيه ليان يومها.</p>
+      <p>فكر:</p>
+      <p>«كم تغيرنا بسبب مقعد؟»</p>
+      <p>ثم صحح الفكرة في ذهنه:</p>
+      <p>«لم يكن المقعد هو الذي غيّرنا.»</p>
+      <p>«بل السؤال الذي ولد بسببه.»</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 36 -->
+  <section class="section" id="ch-36">
+    <span class="section-number">§ 36</span>
+    <h2 class="section-title">الرسالة</h2>
+    <div class="content">
+      <p>أخرج آدم هاتفه.</p>
+      <p>كان قد تلقى قبل دخوله القاعة رسالة قصيرة.</p>
+      <p>لم يفتحها.</p>
+      <p>ربما لأنه عرف صاحبها قبل أن يرى الاسم.</p>
+      <p>فتح الهاتف.</p>
+      <p>كانت الرسالة من ليان.</p>
+      <p>قرأ:</p>
+      <p><strong>«هل ما زلت تبحث عن المكان الذي كان مقدرًا لك أن تجلس فيه؟»</strong></p>
+      <p>ظل ينظر إلى الكلمات.</p>
+      <p>لم تكن الرسالة سؤالًا عن مقعد.</p>
+      <p>كان يعرف ذلك.</p>
+      <p>كانت تسأله عن كل ما عاشه.</p>
+      <p>عن أبوه.</p>
+      <p>عن خوفه.</p>
+      <p>عن القواعد.</p>
+      <p>عن صورته أمام الآخرين.</p>
+      <p>عن القرارات التي خاف منها.</p>
+      <p>وعن الطريق الذي سار فيه.</p>
+      <p>كتب:</p>
+      <p>«ربما لم أعد أبحث عن المكان المقدر لي.»</p>
+      <p>توقف.</p>
+      <p>ثم أضاف:</p>
+      <p>«لكنني لا أعرف إن كنت قد تعلمت فعلًا كيف أختار.»</p>
+      <p>ظهرت علامة القراءة.</p>
+      <p>وبعد لحظات جاء الرد:</p>
+      <p>«لن تعرف وأنت جالس في المكان الذي اختاره لك الآخرون.»</p>
+      <p>رفع آدم عينيه.</p>
+      <p>نظر إلى القاعة.</p>
+      <p>كانت المقاعد ممتلئة بالأسماء.</p>
+      <p>الأسماء تحدد أماكن أصحابها.</p>
+      <p>وهذا طبيعي.</p>
+      <p>لكن شيئًا تغير داخله.</p>
+      <p>لم يعد يرى الاسم كأنه حكم على الإنسان.</p>
+      <p>كان مجرد ترتيب.</p>
+      <p>والترتيب شيء.</p>
+      <p>والإنسان شيء آخر.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 37 -->
+  <section class="section" id="ch-37">
+    <span class="section-number">§ 37</span>
+    <h2 class="section-title">المقعد الأخير</h2>
+    <div class="content">
+      <p>بدأ الحضور بالدخول.</p>
+      <p>وقف آدم.</p>
+      <p>كان المقعد المخصص له في الصف الأول.</p>
+      <p>كان الاسم واضحًا.</p>
+      <p>كل شيء منظم كما ينبغي.</p>
+      <p>نظر إلى المقعد.</p>
+      <p>ثم نظر إلى آخر القاعة.</p>
+      <p>كان هناك مقعد فارغ قرب النافذة.</p>
+      <p>لم يكن مخصصًا له.</p>
+      <p>لم يكن أفضل مقعد.</p>
+      <p>ولم يكن أكثرها راحة.</p>
+      <p>لكنه كان قريبًا من الضوء.</p>
+      <p>مشى آدم نحوه.</p>
+      <p>جلس.</p>
+      <p>بعد لحظات، جاء أحد المنظمين.</p>
+      <p>قال بأدب:</p>
+      <p>«عذرًا، هذا المقعد غير مخصص لك.»</p>
+      <p>نظر آدم إليه.</p>
+      <p>وكان يمكنه أن يشرح.</p>
+      <p>وكان يمكنه أن يحتج.</p>
+      <p>وكان يمكنه أن يستشهد بالبروتوكول.</p>
+      <p>لكنه ابتسم.</p>
+      <p>وقال:</p>
+      <p>«معك حق. سأغادره عندما يأتي صاحبه.»</p>
+      <p>تردد الرجل قليلًا، ثم ابتعد.</p>
+      <p>ابتسم آدم.</p>
+      <p>لقد فهم أخيرًا.</p>
+      <p>ليس رفض القاعدة هو الحرية.</p>
+      <p>وليست طاعة القاعدة هي الاحترام.</p>
+      <p>الحرية أن تعرف لماذا تفعل ما تفعل.</p>
+      <p>والاحترام أن تتذكر أن الآخرين ليسوا أدوات داخل قرارك.</p>
+      <p>والبروتوكول أن يعرف كل شخص مكانه دون أن يتحول المكان إلى سجن.</p>
+      <p>بعد قليل جاء صاحب المقعد.</p>
+      <p>وقف آدم فورًا.</p>
+      <p>قال:</p>
+      <p>«تفضل.»</p>
+      <p>ثم عاد إلى آخر القاعة.</p>
+      <p>وجد مقعدًا آخر.</p>
+      <p>هذه المرة كان المقعد شاغرًا فعلًا.</p>
+      <p>جلس.</p>
+      <p>ولم يسأل أحدًا إن كان هذا هو المكان الصحيح.</p>
+      <p>لأنه لم يعد يبحث عن المكان الصحيح بقدر ما أصبح يبحث عن الإنسان الذي يريد أن يكونه وهو جالس فيه.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 38 -->
+  <section class="section" id="ch-38">
+    <span class="section-number">§ 38</span>
+    <h2 class="section-title">الخاتمة</h2>
+    <div class="content">
+      <p>انتهت المناسبة.</p>
+      <p>خرج الناس واحدًا بعد آخر.</p>
+      <p>وبقي آدم للحظات وحده.</p>
+      <p>نظر إلى القاعة الفارغة.</p>
+      <p>ثم إلى المقاعد.</p>
+      <p>كان المكان نفسه الذي بدأ فيه كل شيء.</p>
+      <p>لكن آدم لم يعد الرجل نفسه.</p>
+      <p>فكر في الطريق الطويل.</p>
+      <p>في أبيه.</p>
+      <p>في طفولته.</p>
+      <p>في خوفه.</p>
+      <p>في ليان.</p>
+      <p>في السؤال الأول.</p>
+      <p>وفي السؤال الأخير.</p>
+      <p>لم يكن قد أصبح إنسانًا يملك كل شيء.</p>
+      <p>ولم يتعلم كيف يتحكم في القدر.</p>
+      <p>ولم يجد طريقة تمنع الألم.</p>
+      <p>ولم يصبح حرًا من ماضيه.</p>
+      <p>لكنه تعلم شيئًا ربما كان أهم.</p>
+      <p>أن الإنسان لا يحتاج إلى أن يختار كل شيء حتى يكون مسؤولًا عن شيء.</p>
+      <p>وأن الظروف يمكن أن تفسر الإنسان دون أن تعفيه.</p>
+      <p>وأن الماضي يستطيع أن يترك أثره دون أن يمتلك المستقبل بالكامل.</p>
+      <p>وأن الاحترام لا يعني الطاعة.</p>
+      <p>وأن الحب لا يعني الملكية.</p>
+      <p>وأن المرأة ليست صورة يرسمها الآخرون ثم يطالبونها بأن تعيش داخلها.</p>
+      <p>وأن الرجل ليس مضطرًا إلى أن يكون صلبًا طوال الوقت حتى يكون قويًا.</p>
+      <p>وأن الاعتراف بالخوف ليس هزيمة.</p>
+      <p>وأن الحرية لا تعني أن الطريق مفتوح كله.</p>
+      <p>بل تعني أن هناك، وسط الطريق، لحظة صغيرة تستطيع فيها أن تقول:</p>
+      <p><strong>هذا ما حدث لي.</strong></p>
+      <p>ثم تسأل:</p>
+      <p><strong>وماذا سأفعل بما حدث لي؟</strong></p>
+      <p>خرج آدم من القاعة.</p>
+      <p>كانت ليان تنتظره في الخارج.</p>
+      <p>نظر إليها.</p>
+      <p>لم تقل شيئًا.</p>
+      <p>ولم يحتج هو إلى أن يقول شيئًا.</p>
+      <p>مشيا معًا.</p>
+      <p>لا يعرف أحدهما إلى أين سينتهي الطريق.</p>
+      <p>لكن هذه المرة لم يكن ذلك مخيفًا.</p>
+      <p>فهما يعرفان أن الإنسان لا يحتاج إلى معرفة النهاية حتى يختار خطوته التالية.</p>
+      <p>سارا.</p>
+      <p>وخلفهما بقيت القاعة.</p>
+      <p>وبقي المقعد.</p>
+      <p>وبقي السؤال.</p>
+      <p>أما الطريق، فكان أمامهما.</p>
+      <p>وفي مكان ما بين ما فُرض عليهما وما اختاراه، كان الإنسان يكتب حكايته.</p>
+      <p>لا بوصفه سيدًا على القدر.</p>
+      <p>ولا بوصفه عبدًا له.</p>
+      <p>بل بوصفه إنسانًا يعيش بين الاثنين.</p>
+      <p>موجة تحمل آثار ما سبقها.</p>
+      <p>وجسيمًا يقف، ولو للحظة، أمام احتمالاته.</p>
+      <p>وربما لم يكن الإنسان حرًا في الطريق الذي بدأه، لكنه كان يملك دائمًا لحظةً واحدة على الأقل يقول فيها:</p>
+      <p><strong>«من هنا سأختار.»</strong></p>
+    </div>
+  </section>
+
+  <div class="chapter-divider">✦ ✦ ✦</div>
+
+  <!-- Ch 39 - Author -->
+  <section class="section" id="ch-39">
+    <span class="section-number">§ 39</span>
+    <h2 class="section-title">نبذة عن المؤلف</h2>
+    <div class="content">
+      <p><strong>علي مسلم الزغيبي</strong></p>
+      <p>كاتب وباحث يهتم بالأسئلة التي تقع عند الحدود بين الإنسان والفكرة، وبين ما يفرضه الواقع وما يستطيع الإنسان أن يختاره داخله.</p>
+      <p>في كتاباته، لا تظهر الفلسفة بوصفها مجموعة من الإجابات النهائية، بل بوصفها محاولة للنظر بعمق إلى الأسئلة التي ترافق الإنسان في حياته اليومية.</p>
+      <p>ومن بين هذه الأسئلة:</p>
+      <p>ماذا نختار فعلًا؟</p>
+      <p>وماذا يُختار لنا؟</p>
+      <p>هل نستطيع أن نفصل الإنسان عن الظروف التي صنعته؟</p>
+      <p>وهل يمكن أن تكون مسؤوليتنا حقيقية حتى عندما لا نكون قد اخترنا نقطة البداية؟</p>
+      <p>يحاول هذا العمل الاقتراب من هذه الأسئلة من خلال الرواية، لا من خلال الشرح المباشر؛ لأن بعض الأفكار لا تُفهم بالكامل عندما تُشرح، وإنما عندما يعيشها الإنسان داخل موقف، وعلاقة، وخوف، وقرار.</p>
+      <p>وفي <strong>«بين الموجة والجسيم»</strong>، تُستخدم الموجة والجسيم بوصفهما صورتين فلسفيتين وأدبيتين للإنسان:</p>
+      <p>الموجة هي الإنسان الذي يحمل أثر عائلته وبيئته وذاكرته وظروفه وتاريخه.</p>
+      <p>والجسيم هو الإنسان عندما يقف داخل تلك الظروف ويتخذ موقفًا.</p>
+      <p>وهذه الصورة في الرواية استعارة أدبية وفلسفية، وليست تفسيرًا أو إثباتًا لنظرية فيزيائية.</p>
+      <p>يبقى السؤال الأساسي مفتوحًا:</p>
+      <p><strong>إذا لم نختر كل ما حدث لنا، فماذا سنفعل بما حدث لنا؟</strong></p>
+    </div>
+  </section>
+
+  <!-- END OF BOOK -->
+  <div class="book-end">
+    <h2>✦ النهاية ✦</h2>
+    <p class="final-quote">«من هنا سأختار.»</p>
+    <p style="margin-top: 2rem;">شكراً لقراءتك هذه الرواية.</p>
+    <p style="margin-top: 1rem;">— Lumenon Project —</p>
+  </div>
+
+</main>
+
+<button class="print-btn" onclick="window.print()" title="طباعة">🖨️</button>
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="للأعلى">↑</button>
+
+<script>
+  // Progress Bar
+  const progressBar = document.getElementById('progressBar');
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (docHeight > 0) ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+    if (scrollTop > 400) topBtn.classList.add('visible');
+    else topBtn.classList.remove('visible');
+  });
+
+  // Sidebar Toggle
+  const sidebar = document.getElementById('sidebar');
+  const toggleBtn = document.getElementById('toggleBtn');
+  const mainContent = document.getElementById('mainContent');
+  let sidebarOpen = false;
+
+  function toggleSidebar() {
+    sidebarOpen = !sidebarOpen;
+    if (sidebarOpen) {
+      sidebar.classList.remove('hidden');
+      toggleBtn.classList.add('hidden');
+      toggleBtn.textContent = '✕';
+    } else {
+      sidebar.classList.add('hidden');
+      toggleBtn.classList.remove('hidden');
+      toggleBtn.textContent = '📑';
+    }
+  }
+
+  function closeSidebar() {
+    if (window.innerWidth < 900) {
+      sidebarOpen = false;
+      sidebar.classList.add('hidden');
+      toggleBtn.classList.remove('hidden');
+      toggleBtn.textContent = '📑';
+    }
+  }
+</script>
+
+</body>
+</html>

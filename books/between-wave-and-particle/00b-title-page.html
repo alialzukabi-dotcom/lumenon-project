@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحة العنوان | بين الموجة والجسيم</title>
+<meta name="description" content="صفحة العنوان — بين الموجة والجسيم — تأليف: علي مسلم الزغيبي">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23c9a227'/><text x='50' y='68' font-size='60' font-family='Georgia' font-weight='900' text-anchor='middle' fill='%230f0f14'>ب</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* تنسيق خاص بصفحة العنوان */
+  .title-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .title-page h1 {
+    font-family: 'Amiri', 'Cairo', serif;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    line-height: 1.3;
+    letter-spacing: 1px;
+  }
+
+  .title-page h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .title-page .description {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 3rem;
+  }
+
+  .title-page .divider {
+    width: 150px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem 0;
+  }
+
+  .title-page .author-label {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .title-page .author-name {
+    font-family: 'Amiri', 'Cairo', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .title-page .publisher {
+    margin-top: 4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body class="ar">
+
+<!-- Reading Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Language Toggle -->
+<button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+  <span class="en-only">العربية</span>
+  <span class="ar-only">English</span>
+</button>
+
+<!-- ============================================
+     Chapter Navigation (Top)
+     ============================================ -->
+<nav class="chapter-nav">
+  <a href="00-cover.html">
+    <span>←</span>
+    <span class="nav-text">
+      <span class="ar-only">الغلاف</span>
+      <span class="en-only">Cover</span>
+    </span>
+  </a>
+  <a href="index.html" class="toc-btn">
+    <span>📑</span>
+    <span class="nav-text">
+      <span class="ar-only">الفهرس</span>
+      <span class="en-only">Index</span>
+    </span>
+  </a>
+  <a href="00c-copyright.html">
+    <span class="nav-text">
+      <span class="ar-only">التالي</span>
+      <span class="en-only">Next</span>
+    </span>
+    <span>→</span>
+  </a>
+</nav>
+
+<!-- ============================================
+     Title Page Content
+     ============================================ -->
+<main class="title-page">
+
+  <h1>
+    <span class="ar-only">بين الموجة والجسيم</span>
+    <span class="en-only">Between Wave and Particle</span>
+  </h1>
+
+  <h2>
+    <span class="ar-only">البروتوكول والإتيكيت والمرأة والقدر والاختيار</span>
+    <span class="en-only">Protocol, Etiquette, Woman, Destiny &amp; Choice</span>
+  </h2>
+
+  <p class="description">
+    <span class="ar-only">قراءة فلسفية في ازدواجية الإنسان</span>
+    <span class="en-only">A Philosophical Reading of Human Duality</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <p class="author-label">
+    <span class="ar-only">تأليف</span>
+    <span class="en-only">By</span>
+  </p>
+
+  <p class="author-name">
+    <span class="ar-only">علي مسلم الزغيبي</span>
+    <span class="en-only">Ali Muslim Al-Zughaibi</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <p class="publisher">
+    <span class="ar-only">مشروع لومينون — كربلاء، العراق</span>
+    <span class="en-only">Lumenon Project — Karbala, Iraq</span>
+  </p>
+
+</main>
+
+<!-- ============================================
+     Chapter Footer Navigation
+     ============================================ -->
+<div class="chapter-footer">
+
+  <a href="00-cover.html" class="nav-card prev">
+    <span class="nav-label">
+      <span class="ar-only">السابق</span>
+      <span class="en-only">Previous</span>
+    </span>
+    <span class="nav-title">
+      <span class="ar-only">الغلاف</span>
+      <span class="en-only">Cover</span>
+    </span>
+  </a>
+
+  <a href="index.html" class="nav-card toc-card">
+    <span class="nav-label">📑</span>
+    <span class="nav-title">
+      <span class="ar-only">الفهرس</span>
+      <span class="en-only">Index</span>
+    </span>
+  </a>
+
+  <a href="00c-copyright.html" class="nav-card next">
+    <span class="nav-label">
+      <span class="ar-only">التالي</span>
+      <span class="en-only">Next</span>
+    </span>
+    <span class="nav-title">
+      <span class="ar-only">صفحة الحقوق</span>
+      <span class="en-only">Copyright Page</span>
+    </span>
+  </a>
+
+</div>
+
+<!-- ============================================
+     Footer
+     ============================================ -->
+<footer class="book-footer">
+  <div class="footer-brand">Lumenon Project</div>
+  <p>
+    <span class="ar-only">جسر بين المنطق والفلسفة — كربلاء، العراق</span>
+    <span class="en-only">Bridging Logic & Philosophy — Karbala, Iraq</span>
+  </p>
+  <p style="margin-top: 1rem; font-size: 0.85rem;">
+    &copy; 2026 Lumenon Project — 
+    <span class="ar-only">جميع الحقوق محفوظة</span>
+    <span class="en-only">All Rights Reserved</span>
+  </p>
+</footer>
+
+<!-- ============================================
+     Print Button
+     ============================================ -->
+<button class="print-btn" onclick="window.print()" title="طباعة">
+  🖨️
+</button>
+
+<!-- ============================================
+     Scroll to Top
+     ============================================ -->
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="للأعلى">
+  ↑
+</button>
+
+<!-- ============================================
+     Scripts
+     ============================================ -->
+<script>
+  // ===== Language Toggle =====
+  function toggleLang() {
+    document.body.classList.toggle('ar');
+    const isAr = document.body.classList.contains('ar');
+    document.documentElement.lang = isAr ? 'ar' : 'en';
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    localStorage.setItem('lumenon-book-lang', isAr ? 'ar' : 'en');
+  }
+
+  (function() {
+    const saved = localStorage.getItem('lumenon-book-lang');
+    if (saved === 'en') {
+      document.body.classList.remove('ar');
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+    }
+  })();
+
+  // ===== Reading Progress Bar =====
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (docHeight > 0) ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+
+    const topBtn = document.getElementById('topBtn');
+    if (scrollTop > 400) {
+      topBtn.classList.add('visible');
+    } else {
+      topBtn.classList.remove('visible');
+    }
+  });
+</script>
+
+</body>
+</html>

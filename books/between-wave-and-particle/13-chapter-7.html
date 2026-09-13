@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفصل السابع: الهيبة ليست خوفًا | بين الموجة والجسيم</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23c9a227'/><text x='50' y='68' font-size='60' font-family='Georgia' font-weight='900' text-anchor='middle' fill='%230f0f14'>ب</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="ar">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+  <span class="en-only">العربية</span>
+  <span class="ar-only">English</span>
+</button>
+
+<nav class="chapter-nav">
+  <a href="12-chapter-6.html">
+    <span>←</span>
+    <span class="nav-text">الفصل السادس</span>
+  </a>
+  <a href="index.html" class="toc-btn">
+    <span>📑</span>
+    <span class="nav-text">الفهرس</span>
+  </a>
+  <a href="14-chapter-8.html">
+    <span class="nav-text">الفصل الثامن</span>
+    <span>→</span>
+  </a>
+</nav>
+
+<main class="book-content">
+
+  <span class="chapter-number">§ 13 — الفصل السابع</span>
+
+  <h1 class="chapter-title">الهيبة ليست خوفًا</h1>
+
+  <p>هناك فرق بين أن يهابك الناس وأن يحترموك.</p>
+
+  <p>الخوف يجعل الإنسان حذرًا منك، أما الاحترام فيجعله مطمئنًا إلى حدودك.</p>
+
+  <p>الشخص المهيب حقًا لا يحتاج إلى تهديد الآخرين باستمرار. حضوره يكفي لأن يعرف الناس أين تقف حدوده.</p>
+
+  <p>الهيبة الحقيقية لا تأتي من ارتفاع الصوت، ولا من القسوة، ولا من القدرة على العقاب.</p>
+
+  <p>إنها تأتي من الاتزان.</p>
+
+  <p>أن تقول ما تعنيه، وأن تفعل ما تقول، وأن لا تتغير مبادئك كلما تغيرت مصلحتك.</p>
+
+  <p>ولهذا قد يكون الإنسان هادئًا جدًا ومع ذلك تكون له هيبة، وقد يكون صاخبًا جدًا ومع ذلك لا يملك إلا الخوف الذي يصنعه حوله.</p>
+
+  <p>الهيبة ليست أن يشعر الآخر بأنه صغير أمامك. الهيبة أن يشعر أنك كبير بما يكفي كي لا تحتاج إلى تصغيره.</p>
+
+  <p>ومن هنا ترتبط الهيبة بالكرامة.</p>
+
+  <p>فمن يحافظ على كرامة الآخرين يحافظ غالبًا على هيبته، أما من يبني حضوره على إذلال الناس، فهو يحتاج إلى إذلال جديد كل يوم كي يحافظ على صورته.</p>
+
+  <p>وهذه ليست هيبة. إنها هشاشة ترتدي ثياب القوة.</p>
+
+</main>
+
+<div class="chapter-footer">
+  <a href="12-chapter-6.html" class="nav-card prev">
+    <span class="nav-label">السابق</span>
+    <span class="nav-title">الفصل السادس: الصمت والكلام</span>
+  </a>
+  <a href="index.html" class="nav-card toc-card">
+    <span class="nav-label">📑</span>
+    <span class="nav-title">الفهرس</span>
+  </a>
+  <a href="14-chapter-8.html" class="nav-card next">
+    <span class="nav-label">التالي</span>
+    <span class="nav-title">الفصل الثامن: الحدود ليست جدرانًا</span>
+  </a>
+</div>
+
+<footer class="book-footer">
+  <div class="footer-brand">Lumenon Project</div>
+  <p>جسر بين المنطق والفلسفة — كربلاء، العراق</p>
+  <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 Lumenon Project — جميع الحقوق محفوظة</p>
+</footer>
+
+<button class="print-btn" onclick="window.print()" title="طباعة">🖨️</button>
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="للأعلى">↑</button>
+
+<script>
+  function toggleLang() {
+    document.body.classList.toggle('ar');
+    const isAr = document.body.classList.contains('ar');
+    document.documentElement.lang = isAr ? 'ar' : 'en';
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    localStorage.setItem('lumenon-book-lang', isAr ? 'ar' : 'en');
+  }
+  (function() {
+    const saved = localStorage.getItem('lumenon-book-lang');
+    if (saved === 'en') {
+      document.body.classList.remove('ar');
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+    }
+  })();
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (docHeight > 0) ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+    const topBtn = document.getElementById('topBtn');
+    if (scrollTop > 400) topBtn.classList.add('visible');
+    else topBtn.classList.remove('visible');
+  });
+</script>
+
+</body>
+</html>
